@@ -1,0 +1,13 @@
+#link {
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+#link:hover {
+    color: #000000;
+    background-color: #FFFFFF;
+    transition: 0.4s;
+}
