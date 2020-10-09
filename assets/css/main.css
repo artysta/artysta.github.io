@@ -817,7 +817,7 @@ aside {
 }
 
 .highlights .items .item {
-    margin-bottom: 35px;
+    margin-bottom: 0px;
 }
 
 .highlights .items .item:last-child {
