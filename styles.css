@@ -1,0 +1,95 @@
+:root {
+    --main-accent-color: #B388FF;
+    --main-background-color: #2B2B2B;
+    --main-text-color: #FFFFFF;
+    --main-group-highlight-color: #444444;
+    --main-highlight-color: #D1C4E9;
+}
+
+body {
+    margin: 0;
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+a {
+    color: var(--main-accent-color);
+    transition: 0.2;
+}
+
+a:hover {
+    color: var(--main-highlight-color);
+    transition: 0.2;
+}
+
+hr {
+    border-top: 2px solid var(--main-accent-color);
+    width: 100%
+}
+
+.div-image {
+    margin: 10px;
+    text-align: center;
+}
+
+.languages-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    transition: 0.4s;
+}
+
+.languages-wrapper:hover {
+    transition: 0.4s;
+}
+
+i {
+    transition: 0.1s;
+}
+
+i:hover {
+    color: var(--main-accent-color);
+    transition: 0.1s;
+}
+
+.wrapper {
+    max-width: -webkit-calc(800px - (30px * 2));
+    max-width: calc(800px - (30px * 2));
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.group-container {
+    transition: 0.4s;
+    display: flex;
+    padding: 5px;
+}
+
+.group-container:hover {
+    transition: 0.4s;
+    display: flex;
+    background-color: var(--main-group-highlight-color);
+    border-radius: 5px;
+}
+
+.group-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+img {
+    width: 70px;
+}
+
+.strong-span {
+    font-weight: bold;
+    color: var(--main-accent-color);
+}
+
+.footer {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
