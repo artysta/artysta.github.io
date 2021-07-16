@@ -37,6 +37,7 @@ hr {
 .languages-wrapper {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     transition: 0.4s;
 }
 
@@ -82,11 +83,6 @@ i:hover {
 
 img {
     width: 70px;
-}
-
-.strong-span {
-    font-weight: bold;
-    color: var(--main-accent-color);
 }
 
 .footer {
