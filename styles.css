@@ -1,9 +1,12 @@
 :root {
-    --main-accent-color: #B388FF;
-    --main-background-color: #2B2B2B;
-    --main-text-color: #FFFFFF;
+    --main-accent-color: #b388ff;
+    --main-background-color: #2b2b2b;
+    --main-text-color: #ffffff;
     --main-group-highlight-color: #444444;
-    --main-highlight-color: #D1C4E9;
+    --main-highlight-color: #d1c4e9;
+    --main-light-background-color: #f1f1f1;
+    --main-light-group-highlight-color: #dadada;
+    --main-light-accent-color: #a600ff;
 }
 
 body {
@@ -12,6 +15,17 @@ body {
     color: var(--main-text-color);
     font-family: monospace;
     line-height: 1.5em;
+    transition: 0.4s;
+}
+
+.body-light-mode {
+    background-color: var(--main-light-background-color);
+    color: black;
+    transition: 0.4s;
+}
+
+.light-light {
+    fill: black;
 }
 
 ::selection {
@@ -29,9 +43,21 @@ a:hover {
     transition: 0.2;
 }
 
+.a-light-mode {
+    color: var(--main-light-accent-color);
+}
+
+.a-light-mode:hover {
+    color: var(--main-accent-color);
+}
+
 hr {
     border-top: 2px solid var(--main-accent-color);
-    width: 100%
+    width: 100%;
+}
+
+.hr-light-mode {
+    border-color: var(--main-light-accent-color);
 }
 
 .div-image {
@@ -81,6 +107,10 @@ i:hover {
     border-radius: 5px;
 }
 
+.group-container-light-mode:hover {
+    background-color: var(--main-light-group-highlight-color);
+}
+
 .group-logo-container {
     display: flex;
     align-items: center;
@@ -93,4 +123,17 @@ img {
 .footer {
     margin-top: 30px;
     margin-bottom: 10px;
+}
+
+button {
+    background-color: var(--main-background-color);
+    color: var(--main-accent-color);
+    border: 1px solid var(--main-accent-color);
+    font-family: monospace;
+    width: 100%;
+}
+
+.button-light-mode {
+    background-color: var(--main-light-background-color);
+    color: var(--main-light-accent-color);
 }
