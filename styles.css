@@ -4,7 +4,7 @@
     --main-text-color: #ffffff;
     --main-group-highlight-color: #444444;
     --main-highlight-color: #d1c4e9;
-    --main-light-background-color: #f1f1f1;
+    --main-light-background-color: #f5f5f5;
     --main-light-group-highlight-color: #dadada;
     --main-light-accent-color: #a600ff;
 }
@@ -131,9 +131,23 @@ button {
     border: 1px solid var(--main-accent-color);
     font-family: monospace;
     width: 100%;
+    transition: 0.4s;
+}
+
+button:hover {
+    background-color: var(--main-light-background-color);
+    color: var(--main-light-accent-color);
+    transition: 0.4s;
 }
 
 .button-light-mode {
     background-color: var(--main-light-background-color);
     color: var(--main-light-accent-color);
+    transition: 0.4s;
+}
+
+.button-light-mode:hover {
+    background-color: var(--main-background-color);
+    color: var(--main-accent-color);
+    transition: 0.4s;
 }
