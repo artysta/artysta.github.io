@@ -38,17 +38,19 @@ a {
     transition: 0.2;
 }
 
-a:hover {
+a:hover, a:focus {
     color: var(--main-highlight-color);
     transition: 0.2;
+    outline: 0px;
 }
 
 .a-light-mode {
     color: var(--main-light-accent-color);
 }
 
-.a-light-mode:hover {
+.a-light-mode:hover, .a-light-mode:focus {
     color: var(--main-accent-color);
+    outline: 0px;
 }
 
 hr {
@@ -134,10 +136,11 @@ button {
     transition: 0.4s;
 }
 
-button:hover {
+button:hover, button:focus {
     background-color: var(--main-light-background-color);
     color: var(--main-light-accent-color);
     transition: 0.4s;
+    outline: 0px;
 }
 
 .button-light-mode {
@@ -146,8 +149,9 @@ button:hover {
     transition: 0.4s;
 }
 
-.button-light-mode:hover {
+.button-light-mode:hover, .button-light-mode:focus {
     background-color: var(--main-background-color);
     color: var(--main-accent-color);
     transition: 0.4s;
+    outline: 0px;
 }
