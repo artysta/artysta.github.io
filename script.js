@@ -1,4 +1,9 @@
+window.onload = init;
 var isDarkModeOn = true;
+
+function init() {
+    setLastEditedAtDate();
+}
 
 function darkMode() {
     isDarkModeOn = !isDarkModeOn;
@@ -37,4 +42,16 @@ function darkMode() {
         let extension = image.dataset.extension;
         image.src = isDarkModeOn ? `${newSrc}-light.${extension}` : `${newSrc}-dark.${extension}`;
     }
+}
+
+function setLastEditedAtDate() {
+    let footer = document.getElementsByClassName('footer')[0];
+    fetch('https://api.github.com/repos/artysta/artysta.github.io/commits')
+    .then(response => response.json())
+    .then(commits => {
+        let latestCommit = commits[0];
+        let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
+        footer.innerHTML = `Last edited at ${lastEditedAtDate} CET | commit <a href="${latestCommit.html_url}" target="_blank">${latestCommit.sha}</a>`;
+    })
+    .catch(error => footer.innerHTML = `Last edited at N/A`);
 }
