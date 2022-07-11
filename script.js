@@ -51,7 +51,7 @@ function setLastEditedAtDate() {
     .then(commits => {
         let latestCommit = commits[0];
         let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
-        footer.innerHTML = `Last edited at ${lastEditedAtDate} CET | commit <a href="${latestCommit.html_url}" target="_blank">${latestCommit.sha}</a>`;
+        footer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href="${latestCommit.html_url}" target="_blank">${latestCommit.sha}</a>`;
     })
     .catch(error => footer.innerHTML = `Last edited at N/A`);
 }
