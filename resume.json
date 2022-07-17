@@ -1,24 +1,45 @@
 {
   "about": {
-    "description": ""
+    "sectionName": "About Me",
+    "description": "At the moment I work as a Salesforce Developer at Accenture Poland and I learn programming languages on my own. I also study economics and computer science. "
   },
   "personal": {
-    "name": "",
-    "birthYear": "",
-    "nationality": ""
+    "sectionName": "Personal",
+    "name": "Name: Adrian",
+    "birthYear": "Birthyear: 1993",
+    "nationality": "Nationality: Poland"
   },
-  "workplaces": [
-    {
-      "name": "",
-      "logoUrl": "",
-      "positions": [
-        {
-          "title": "",
-          "dateFrom": "",
-          "dateThru": "",
-          "logoUrl": "",
-          "duties": {
-            "duty": [
+  "workplaces": {
+    "sectionName": "Work Experience",
+    "items": [
+      {
+        "name": "",
+        "logoUrl": "",
+        "positions": [
+          {
+            "title": "",
+            "dateFrom": "",
+            "dateThru": "",
+            "logoUrl": "",
+            "duties": {
+              "duty": [
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ]
+            }
+          },
+          {
+            "title": "",
+            "dateFrom": "",
+            "dateThru": "",
+            "duties": [
               {
                 "value": ""
               },
@@ -30,103 +51,94 @@
               }
             ]
           }
-        },
-        {
-          "title": "",
-          "dateFrom": "",
-          "dateThru": "",
-          "duties": [
-            {
-              "value": ""
-            },
-            {
-              "value": ""
-            },
-            {
-              "value": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "",
-      "logoUrl": "",
-      "positions": [
-        {
-          "name": "",
-          "dateFrom": "",
-          "dateThru": "",
-          "duties": [
-            {
-              "value": ""
-            },
-            {
-              "value": ""
-            },
-            {
-              "value": ""
-            }
-          ]
-        },
-        {
-          "name": "",
-          "dateFrom": "",
-          "dateThru": "",
-          "duties": [
-            {
-              "value": ""
-            },
-            {
-              "value": ""
-            },
-            {
-              "value": ""
-            }
-          ]
-        }
-      ],
-      "duties": [
-        {
-          "value": ""
-        },
-        {
-          "value": ""
-        },
-        {
-          "value": ""
-        }
-      ]
-    }
-  ],
-  "schools": [
-    {
-      "name": "",
-      "logoUrl": "",
-      "dateFrom": "",
-      "dateThru": "",
-      "fieldOfStudy": ""
-    },
-    {
-      "name": "",
-      "logoUrl": "",
-      "dateFrom": "",
-      "dateThru": "",
-      "fieldOfStudy": ""
-    }
-  ],
-  "languages": [
-    {
-      "name": "",
-      "level": ""
-    },
-    {
-      "name": "",
-      "level": ""
-    }
-  ],
+        ]
+      },
+      {
+        "name": "",
+        "logoUrl": "",
+        "positions": [
+          {
+            "name": "",
+            "dateFrom": "",
+            "dateThru": "",
+            "duties": [
+              {
+                "value": ""
+              },
+              {
+                "value": ""
+              },
+              {
+                "value": ""
+              }
+            ]
+          },
+          {
+            "name": "",
+            "dateFrom": "",
+            "dateThru": "",
+            "duties": [
+              {
+                "value": ""
+              },
+              {
+                "value": ""
+              },
+              {
+                "value": ""
+              }
+            ]
+          }
+        ],
+        "duties": [
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "schools": {
+    "sectionName": "Education",
+    "items": [
+      {
+        "name": "",
+        "logoUrl": "",
+        "dateFrom": "",
+        "dateThru": "",
+        "fieldOfStudy": ""
+      },
+      {
+        "name": "",
+        "logoUrl": "",
+        "dateFrom": "",
+        "dateThru": "",
+        "fieldOfStudy": ""
+      }
+    ]
+  },
+  "languages": {
+    "sectionName": "Languages",
+    "items": [
+      {
+        "name": "",
+        "level": ""
+      },
+      {
+        "name": "",
+        "level": ""
+      }
+    ]
+  },
   "technologies": {
-    "technology": [
+    "sectionName": "Programming Languages & Technologies",
+    "items": [
       {
         "name": "",
         "iconUrl": ""
@@ -135,8 +147,11 @@
         "name": "",
         "iconUrl": ""
       }
-    ],
-    "certificates": [
+    ]
+  },
+  "certificates": {
+    "sectionName": "Certifications & Courses",
+    "items": [
       {
         "name": "",
         "url": ""
@@ -145,8 +160,11 @@
         "name": "",
         "url": ""
       }
-    ],
-    "interestingUrls": [
+    ]
+  },
+  "interestingUrls": {
+    "sectionName": "Some interesting URLs",
+    "items": [
       {
         "name": "",
         "url": ""
@@ -155,8 +173,11 @@
         "name": "",
         "url": ""
       }
-    ],
-    "contact": [
+    ]
+  },
+  "contact": {
+    "sectionName": "Contact",
+    "items": [
       {
         "name": "",
         "url": ""
