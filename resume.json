@@ -1,0 +1,170 @@
+{
+  "about": {
+    "description": ""
+  },
+  "personal": {
+    "name": "",
+    "birthYear": "",
+    "nationality": ""
+  },
+  "workplaces": [
+    {
+      "name": "",
+      "logoUrl": "",
+      "positions": [
+        {
+          "title": "",
+          "dateFrom": "",
+          "dateThru": "",
+          "logoUrl": "",
+          "duties": {
+            "duty": [
+              {
+                "value": ""
+              },
+              {
+                "value": ""
+              },
+              {
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "title": "",
+          "dateFrom": "",
+          "dateThru": "",
+          "duties": [
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "",
+      "logoUrl": "",
+      "positions": [
+        {
+          "name": "",
+          "dateFrom": "",
+          "dateThru": "",
+          "duties": [
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "",
+          "dateFrom": "",
+          "dateThru": "",
+          "duties": [
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "duties": [
+        {
+          "value": ""
+        },
+        {
+          "value": ""
+        },
+        {
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "schools": [
+    {
+      "name": "",
+      "logoUrl": "",
+      "dateFrom": "",
+      "dateThru": "",
+      "fieldOfStudy": ""
+    },
+    {
+      "name": "",
+      "logoUrl": "",
+      "dateFrom": "",
+      "dateThru": "",
+      "fieldOfStudy": ""
+    }
+  ],
+  "languages": [
+    {
+      "name": "",
+      "level": ""
+    },
+    {
+      "name": "",
+      "level": ""
+    }
+  ],
+  "technologies": {
+    "technology": [
+      {
+        "name": "",
+        "iconUrl": ""
+      },
+      {
+        "name": "",
+        "iconUrl": ""
+      }
+    ],
+    "certificates": [
+      {
+        "name": "",
+        "url": ""
+      },
+      {
+        "name": "",
+        "url": ""
+      }
+    ],
+    "interestingUrls": [
+      {
+        "name": "",
+        "url": ""
+      },
+      {
+        "name": "",
+        "url": ""
+      }
+    ],
+    "contact": [
+      {
+        "name": "",
+        "url": ""
+      },
+      {
+        "name": "",
+        "url": ""
+      }
+    ]
+  }
+}
