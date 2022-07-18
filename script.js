@@ -2,10 +2,12 @@ window.onload = init;
 var isDarkModeOn = true;
 
 function init() {
-    renderAbout();
-    renderPersonal();
-    renderWorkplaces();
-    setLastEditedAtDate();
+    fetchResumeData().then(data => {
+        renderAbout(data);
+        renderPersonal(data);
+        renderWorkplaces(data);
+        setLastEditedAtDate(data);
+    });
 }
 
 function darkMode() {
@@ -59,103 +61,95 @@ function setLastEditedAtDate() {
     .catch(error => footer.innerHTML = `Last edited at N/A`);
 }
 
-function renderAbout() {
+function renderAbout(data) {
     let aboutContainer = document.getElementById("about");
-    fetch("resume.json")
-        .then(response => response.json())
-        .then(resume => {
-            let divGroupContainer = document.createElement("div");
-            divGroupContainer.classList.add("group-container");
+    let divGroupContainer = document.createElement("div");
+    divGroupContainer.classList.add("group-container");
 
-            let sectionTitle = document.createElement("h2");
-            sectionTitle.innerHTML = resume.about.title;
-            aboutContainer.appendChild(sectionTitle);
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.about.title;
+    aboutContainer.appendChild(sectionTitle);
 
-            let description = document.createElement("p");
-            description.innerHTML = resume.about.description;
+    let description = document.createElement("p");
+    description.innerHTML = data.about.description;
 
-            divGroupContainer.appendChild(description);
-            aboutContainer.appendChild(divGroupContainer);
-        });
+    divGroupContainer.appendChild(description);
+    aboutContainer.appendChild(divGroupContainer);
 }
 
-function renderPersonal() {
+function renderPersonal(data) {
     let personalContainer = document.getElementById("personal");
-    fetch("resume.json")
-        .then(response => response.json())
-        .then(resume => {
-            let divGroupContainer = document.createElement("div");
-            divGroupContainer.classList.add("group-container");
+    let divGroupContainer = document.createElement("div");
+    divGroupContainer.classList.add("group-container");
 
-            let sectionTitle = document.createElement("h2");
-            sectionTitle.innerHTML = resume.personal.title;
-            personalContainer.appendChild(sectionTitle);
-            
-            let personalUl = document.createElement("ul");
-            let nameLi = document.createElement("li");
-            nameLi.innerHTML = resume.personal.name;
-            personalUl.appendChild(nameLi);
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.personal.title;
+    personalContainer.appendChild(sectionTitle);
 
-            let birthYearLi = document.createElement("li");
-            birthYearLi.innerHTML = resume.personal.birthYear;
-            personalUl.appendChild(birthYearLi);
+    let personalUl = document.createElement("ul");
+    let nameLi = document.createElement("li");
+    nameLi.innerHTML = data.personal.name;
+    personalUl.appendChild(nameLi);
 
-            let nationalityLi = document.createElement("li");
-            nationalityLi.innerHTML = resume.personal.nationality;
-            personalUl.appendChild(nationalityLi);
+    let birthYearLi = document.createElement("li");
+    birthYearLi.innerHTML = data.personal.birthYear;
+    personalUl.appendChild(birthYearLi);
 
-            divGroupContainer.appendChild(personalUl);
-            personalContainer.appendChild(divGroupContainer);
-        });
+    let nationalityLi = document.createElement("li");
+    nationalityLi.innerHTML = data.personal.nationality;
+    personalUl.appendChild(nationalityLi);
+
+    divGroupContainer.appendChild(personalUl);
+    personalContainer.appendChild(divGroupContainer);
 }
 
-function renderWorkplaces() {
+function renderWorkplaces(data) {
     let workplacesContainer = document.getElementById("workplaces");
-    fetch("resume.json")
-        .then(response => response.json())
-        .then(resume => {
-            let sectionTitle = document.createElement("h2");
-            sectionTitle.innerHTML = resume.workplaces.title;
-            workplacesContainer.appendChild(sectionTitle);
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.workplaces.title;
+    workplacesContainer.appendChild(sectionTitle);
 
-            resume.workplaces.items.forEach(workplace => {
-                let divGroupContainer = document.createElement("div");
-                divGroupContainer.classList.add("group-container");
+    data.workplaces.items.forEach(workplace => {
+        let divGroupContainer = document.createElement("div");
+        divGroupContainer.classList.add("group-container");
 
-                let divLogoContainer = document.createElement("div");
-                divLogoContainer.classList.add("group-logo-container");
+        let divLogoContainer = document.createElement("div");
+        divLogoContainer.classList.add("group-logo-container");
 
-                let img = document.createElement("img");
-                img.src = workplace.logoUrl;
+        let img = document.createElement("img");
+        img.src = workplace.logoUrl;
 
-                let divPositionsContainer = document.createElement("div");
+        let divPositionsContainer = document.createElement("div");
 
-                workplace.positions.forEach(position => {
-                    // POSITION START
-                    let positionUl = document.createElement("ul");
-                    let positionLi = document.createElement("li");
-                    positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
-                    positionUl.appendChild(positionLi);
+        workplace.positions.forEach(position => {
+            // POSITION START
+            let positionUl = document.createElement("ul");
+            let positionLi = document.createElement("li");
+            positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
+            positionUl.appendChild(positionLi);
 
-                    position.duties.forEach(duty => {
-                        // DUTY START
-                        let dutyUl = document.createElement("ul");
-                        let dutyLi = document.createElement("li");
-                        dutyLi.innerHTML = duty.value;
-                        dutyUl.appendChild(dutyLi);
-                        positionUl.appendChild(dutyUl);
-                        // DUTY END
-                    });
-                    // POSITION END
-                    divPositionsContainer.appendChild(positionUl);
-                });
-
-                divLogoContainer.appendChild(img);
-                divGroupContainer.appendChild(divLogoContainer);
-                divGroupContainer.appendChild(divPositionsContainer);
-                workplacesContainer.appendChild(divGroupContainer);
+            position.duties.forEach(duty => {
+                // DUTY START
+                let dutyUl = document.createElement("ul");
+                let dutyLi = document.createElement("li");
+                dutyLi.innerHTML = duty.value;
+                dutyUl.appendChild(dutyLi);
+                positionUl.appendChild(dutyUl);
+                // DUTY END
             });
+            // POSITION END
+            divPositionsContainer.appendChild(positionUl);
         });
+
+        divLogoContainer.appendChild(img);
+        divGroupContainer.appendChild(divLogoContainer);
+        divGroupContainer.appendChild(divPositionsContainer);
+        workplacesContainer.appendChild(divGroupContainer);
+    });
 
     workplaces.appendChild(ulPosition);
+}
+
+function fetchResumeData() {
+    return fetch("resume.json").then(response => response.json());
 }
