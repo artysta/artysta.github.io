@@ -146,8 +146,6 @@ function renderWorkplaces(data) {
         divGroupContainer.appendChild(divPositionsContainer);
         workplacesContainer.appendChild(divGroupContainer);
     });
-
-    workplaces.appendChild(ulPosition);
 }
 
 function fetchResumeData() {
