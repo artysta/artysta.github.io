@@ -1,53 +1,105 @@
 {
   "about": {
-    "sectionName": "About Me",
+    "title": "About Me",
     "description": "At the moment I work as a Salesforce Developer at Accenture Poland and I learn programming languages on my own. I also study economics and computer science. "
   },
   "personal": {
-    "sectionName": "Personal",
+    "title": "Personal",
+    "description": "",
     "name": "Name: Adrian",
     "birthYear": "Birthyear: 1993",
     "nationality": "Nationality: Poland"
   },
   "workplaces": {
-    "sectionName": "Work Experience",
+    "title": "Work Experience",
+    "description": "",
     "items": [
       {
-        "name": "",
-        "logoUrl": "",
+        "name": "Accenture Poland",
+        "logoUrl": "./logos/accenture-light.svg",
         "positions": [
           {
-            "title": "",
-            "dateFrom": "",
-            "dateThru": "",
-            "logoUrl": "",
+            "title": "Salesforce Developer",
+            "dateFrom": "09.2021",
+            "dateThru": "to this day",
             "duties": {
               "duty": [
                 {
-                  "value": ""
+                  "value": "Salesforce Platform development (Apex, SOQL, declarative tools)"
                 },
                 {
-                  "value": ""
+                  "value": "creating and supporting solutions in an international team in line with Agile principles"
                 },
                 {
-                  "value": ""
+                  "value": "supporting testers and DevOps teams"
                 }
               ]
             }
           },
           {
-            "title": "",
-            "dateFrom": "",
-            "dateThru": "",
+            "title": "Junior Salesforce Developer",
+            "dateFrom": "05.2021",
+            "dateThru": "09.2021",
             "duties": [
               {
-                "value": ""
+                "value": "learning Salesforce technology"
               },
               {
-                "value": ""
+                "value": "learning basics of Apex, LWC, Aura, SOQL & declarative tools"
               },
               {
-                "value": ""
+                "value": "building Trailhead profile"
+              }
+            ]
+          },
+          {
+            "title": "Accenture Java Academy Participant",
+            "dateFrom": "04.2021",
+            "dateThru": "04.2021",
+            "duties": [
+              {
+                "value": "Java Core, OOP"
+              },
+              {
+                "value": "design patterns & good practices"
+              },
+              {
+                "value": "Spring basics"
+              },
+              {
+                "value": "and many more..."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MANT",
+        "logoUrl": "./logos/mant-light.png ",
+        "positions": [
+          {
+            "name": "Digital Marketing Specialist, SEO Copywriter",
+            "dateFrom": "08.2016",
+            "dateThru": "05.2021",
+            "duties": [
+              {
+                "value": "SEO copywriting"
+              },
+              {
+                "value": "link building"
+              },
+              {
+                "value": "taking care for the WordPress websites"
+              }
+            ]
+          },
+          {
+            "name": "Digital Marketing / SEO intern ",
+            "dateFrom": "02.2016",
+            "dateThru": "08.2016",
+            "duties": [
+              {
+                "value": "writing SEO content"
               }
             ]
           }
@@ -55,136 +107,332 @@
       },
       {
         "name": "",
-        "logoUrl": "",
+        "logoUrl": "./icons/close-light.svg",
         "positions": [
           {
-            "name": "",
-            "dateFrom": "",
-            "dateThru": "",
+            "name": "a very strange time in my life",
+            "dateFrom": "06.2015",
+            "dateThru": "02.2016",
             "duties": [
               {
-                "value": ""
+                "value": "mowing the lawns, working in the call center or in the manufacturing factories"
               },
               {
-                "value": ""
-              },
-              {
-                "value": ""
+                "value": "thinking a lot that it was pretty bad idea to abandon Computer Science at AGH..."
               }
             ]
           },
           {
-            "name": "",
-            "dateFrom": "",
-            "dateThru": "",
+            "name": "Digital Marketing / SEO intern ",
+            "dateFrom": "02.2016",
+            "dateThru": "08.2016",
             "duties": [
               {
-                "value": ""
-              },
-              {
-                "value": ""
-              },
-              {
-                "value": ""
+                "value": "writing SEO content"
               }
             ]
-          }
-        ],
-        "duties": [
-          {
-            "value": ""
-          },
-          {
-            "value": ""
-          },
-          {
-            "value": ""
           }
         ]
       }
     ]
   },
   "schools": {
-    "sectionName": "Education",
+    "title": "Education",
+    "description": "",
     "items": [
       {
-        "name": "",
-        "logoUrl": "",
-        "dateFrom": "",
-        "dateThru": "",
-        "fieldOfStudy": ""
+        "name": "College Of Economics And Computer Science",
+        "logoUrl": "./logos/wsei-light.png",
+        "fieldOfStudies": [
+          {
+            "dateFrom": "2018",
+            "dateThru": "to this day",
+            "details": [
+              {
+                "value": "Computer Science (mobile & web applications development)"
+              },
+              {
+                "value": "Part-time"
+              }
+            ]
+          }
+        ]
       },
       {
-        "name": "",
-        "logoUrl": "",
-        "dateFrom": "",
-        "dateThru": "",
-        "fieldOfStudy": ""
+        "name": "AGH University of Science and Technology",
+        "logoUrl": "./logos/agh-light.svg",
+        "fieldOfStudies": [
+          {
+            "dateFrom": "2014",
+            "dateThru": "2015 (interrupted)",
+            "details": [
+              {
+                "value": "Environmental Engineering"
+              },
+              {
+                "value": "Full-time"
+              }
+            ]
+          },
+          {
+            "dateFrom": "2013",
+            "dateThru": "2014 (interrupted)",
+            "details": [
+              {
+                "value": "Computer Science"
+              },
+              {
+                "value": "Full-time"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
   "languages": {
-    "sectionName": "Languages",
+    "title": "Languages",
+    "description": "",
     "items": [
       {
-        "name": "",
-        "level": ""
+        "name": "Polish",
+        "level": "native"
       },
       {
-        "name": "",
-        "level": ""
+        "name": "English",
+        "level": "B2"
+      },
+      {
+        "name": "German",
+        "level": "A1"
       }
     ]
   },
   "technologies": {
-    "sectionName": "Programming Languages & Technologies",
+    "title": "Programming Languages & Technologies",
+    "description": "Here are some technologies and programming languages that ​​I have been dealing with or I am currently learning (or I just want to learn).",
     "items": [
       {
-        "name": "",
-        "iconUrl": ""
+        "name": "Java",
+        "class": "fab fa-java fa-2x",
+        "size": ""
       },
       {
-        "name": "",
-        "iconUrl": ""
+        "name": "C#",
+        "class": "devicon-csharp-plain",
+        "size": "30px"
+      },
+      {
+        "name": ".NET",
+        "class": "devicon-dotnetcore-plain",
+        "size": "30px"
+      },
+      {
+        "name": "Python",
+        "class": "fab fa-python fa-2x",
+        "size": ""
+      },
+      {
+        "name": "HTML",
+        "class": "fab fa-html5 fa-2x",
+        "size": ""
+      },
+      {
+        "name": "CSS",
+        "class": "fab fa-css3-alt fa-2x",
+        "size": ""
+      },
+      {
+        "name": "JavaScript",
+        "class": "fab fa-js-square fa-2x",
+        "size": ""
+      },
+      {
+        "name": "TypeScript",
+        "class": "devicon-typescript-plain",
+        "size": "30px"
+      },
+      {
+        "name": "React",
+        "class": "fab fa-react fa-2x",
+        "size": ""
+      },
+      {
+        "name": "Angular",
+        "class": "fab fa-angular fa-2x",
+        "size": ""
+      },
+      {
+        "name": "Xamarin",
+        "class": "devicon-xamarin-original",
+        "size": "30px"
+      },
+      {
+        "name": "Spring",
+        "class": "devicon-spring-plain",
+        "size": "30px"
+      },
+      {
+        "name": "Android",
+        "class": "devicon-android-plain",
+        "size": "30px"
+      },
+      {
+        "name": "SQL",
+        "class": "fas fa-database fa-2x",
+        "size": ""
+      },
+      {
+        "name": "Git",
+        "class": "devicon-git-plain",
+        "size": "30px"
+      },
+      {
+        "name": "GitHub",
+        "class": "fab fa-github fa-2x",
+        "size": ""
+      },
+      {
+        "name": "Sourcetree",
+        "class": "devicon-sourcetree-original",
+        "size": "30px"
+      },
+      {
+        "name": "Salesforce",
+        "class": "fab fa-salesforce fa-2x",
+        "size": ""
+      },
+      {
+        "name": "Wordpress",
+        "class": "fab fa-wordpress fa-2x",
+        "size": ""
+      },
+      {
+        "name": "Vim",
+        "class": "devicon-vim-plain",
+        "size": "30px"
+      },
+      {
+        "name": "Android Studio",
+        "class": "devicon-androidstudio-plain",
+        "size": "30px"
+      },
+      {
+        "name": "Visual Studio",
+        "class": "devicon-visualstudio-plain",
+        "size": "30px"
+      },
+      {
+        "name": "Visual Studio Code",
+        "class": "devicon-vscode-plain",
+        "size": "30px"
+      },
+      {
+        "name": "Atom",
+        "class": "devicon-atom-original",
+        "size": "30px"
+      },
+      {
+        "name": "IntelliJ IDEA",
+        "class": "devicon-intellij-plain",
+        "size": "30px"
+      },
+      {
+        "name": "Yarn",
+        "class": "devicon-yarn-plain",
+        "size": "30px"
+      },
+      {
+        "name": "npm",
+        "class": "devicon-npm-original-wordmark",
+        "size": "30px"
+      },
+      {
+        "name": "Jira",
+        "class": "devicon-jira-plain",
+        "size": "30px"
       }
     ]
   },
   "certificates": {
-    "sectionName": "Certifications & Courses",
+    "title": "Certifications & Courses",
+    "description": "Yeah I know. Certifications do not really matter. But it is good to have them anyway.",
     "items": [
       {
-        "name": "",
-        "url": ""
+        "name": "MTA 98-364: Database Fundamentals",
+        "url": "https://www.credly.com/badges/ebc16870-1aa6-4de6-ac03-efa1716c7fb0/public_url"
       },
       {
-        "name": "",
-        "url": ""
+        "name": "MTA 98-375: HTML5 Application Development Fundamentals",
+        "url": "https://www.credly.com/badges/e935d4f8-e067-45eb-b15d-3c541a226ca0/public_url"
+      },
+      {
+        "name": "MTA 98-361: Software Development Fundamentals",
+        "url": "https://www.credly.com/badges/9ce248ca-75da-41e6-a358-ce22c2770acd/public_url"
+      },
+      {
+        "name": "MTA 98-366: Networking Fundamentals",
+        "url": "https://www.credly.com/badges/5ad2d60a-d323-42d5-b4ff-0de799845943/public_url"
+      },
+      {
+        "name": "MTA 98-367: Security Fundamentals",
+        "url": "https://www.credly.com/badges/6312845a-42b4-45c2-b11b-a288403b92fb/public_url"
+      },
+      {
+        "name": "MTA 98-388: Introduction to Programming using Java",
+        "url": "https://www.credly.com/badges/911a968a-e0b9-4b56-8a9a-f52e1e9ac889/public_url"
+      },
+      {
+        "name": "MTA 98-381: Introduction to Programming using Python",
+        "url": "https://www.credly.com/badges/e5ed8958-28b9-4a98-982e-5dff4b02210e/public_url"
+      },
+      {
+        "name": "Accenture JavaScript Salesforce",
+        "url": "https://app.diplomasafe.com/pl-PL/diploma/ddd5ce6ffadc571f2a916875c130f5d65e6b61f97"
+      },
+      {
+        "name": "Apex Specialist Superbadge",
+        "url": "https://trailblazer.me/id/adrian-kurek"
       }
     ]
   },
   "interestingUrls": {
-    "sectionName": "Some interesting URLs",
+    "title": "Some interesting URLs",
+    "description": "",
     "items": [
       {
-        "name": "",
-        "url": ""
+        "name": "linkedin.com/in/adrian-kurek",
+        "url": "https://www.linkedin.com/in/adrian-kurek"
       },
       {
-        "name": "",
-        "url": ""
+        "name": "github.com/artysta",
+        "url": "https://github.com/artysta"
+      },
+      {
+        "name": "adriankurek.pl",
+        "url": "http://adriankurek.pl"
+      },
+      {
+        "name": "trailblazer.me/id/adrian-kurek",
+        "url": "https://trailblazer.me/id/adrian-kurek"
       }
     ]
   },
   "contact": {
-    "sectionName": "Contact",
+    "title": "Contact",
+    "description": "",
     "items": [
       {
-        "name": "",
-        "url": ""
+        "name": "+48 608 158 070",
+        "url": "tel:+48 608 158 070"
       },
       {
-        "name": "",
-        "url": ""
+        "name": "kontakt@adriankurek.pl",
+        "url": "mailto:kontakt@adriankurek.pl"
+      },
+      {
+        "name": "adrian.kurek93@gmail.com",
+        "url": "mailto:adrian.kurek93@gmail.com"
       }
     ]
   }
