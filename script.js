@@ -2,6 +2,7 @@ window.onload = init;
 var isDarkModeOn = true;
 
 function init() {
+    renderAbout();
     renderPersonal();
     renderWorkplaces();
     setLastEditedAtDate();
@@ -58,6 +59,26 @@ function setLastEditedAtDate() {
     .catch(error => footer.innerHTML = `Last edited at N/A`);
 }
 
+function renderAbout() {
+    let aboutContainer = document.getElementById("about");
+    fetch("resume.json")
+        .then(response => response.json())
+        .then(resume => {
+            let divGroupContainer = document.createElement("div");
+            divGroupContainer.classList.add("group-container");
+
+            let sectionTitle = document.createElement("h2");
+            sectionTitle.innerHTML = resume.about.title;
+            aboutContainer.appendChild(sectionTitle);
+
+            let description = document.createElement("p");
+            description.innerHTML = resume.about.description;
+
+            divGroupContainer.appendChild(description);
+            aboutContainer.appendChild(divGroupContainer);
+        });
+}
+
 function renderPersonal() {
     let personalContainer = document.getElementById("personal");
     fetch("resume.json")
@@ -74,7 +95,7 @@ function renderPersonal() {
             let nameLi = document.createElement("li");
             nameLi.innerHTML = resume.personal.name;
             personalUl.appendChild(nameLi);
-            
+
             let birthYearLi = document.createElement("li");
             birthYearLi.innerHTML = resume.personal.birthYear;
             personalUl.appendChild(birthYearLi);
