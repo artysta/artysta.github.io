@@ -2,6 +2,7 @@ window.onload = init;
 var isDarkModeOn = true;
 
 function init() {
+    renderPersonal();
     renderWorkplaces();
     setLastEditedAtDate();
 }
@@ -55,6 +56,36 @@ function setLastEditedAtDate() {
         footer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href="${latestCommit.html_url}" target="_blank">${latestCommit.sha}</a>`;
     })
     .catch(error => footer.innerHTML = `Last edited at N/A`);
+}
+
+function renderPersonal() {
+    let personalContainer = document.getElementById("personal");
+    fetch("resume.json")
+        .then(response => response.json())
+        .then(resume => {
+            let divGroupContainer = document.createElement("div");
+            divGroupContainer.classList.add("group-container");
+
+            let sectionTitle = document.createElement("h2");
+            sectionTitle.innerHTML = resume.personal.title;
+            personalContainer.appendChild(sectionTitle);
+            
+            let personalUl = document.createElement("ul");
+            let nameLi = document.createElement("li");
+            nameLi.innerHTML = resume.personal.name;
+            personalUl.appendChild(nameLi);
+            
+            let birthYearLi = document.createElement("li");
+            birthYearLi.innerHTML = resume.personal.birthYear;
+            personalUl.appendChild(birthYearLi);
+
+            let nationalityLi = document.createElement("li");
+            nationalityLi.innerHTML = resume.personal.nationality;
+            personalUl.appendChild(nationalityLi);
+
+            divGroupContainer.appendChild(personalUl);
+            personalContainer.appendChild(divGroupContainer);
+        });
 }
 
 function renderWorkplaces() {
