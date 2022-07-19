@@ -1,4 +1,4 @@
-//window.onload = init;
+window.onload = init;
 var isDarkModeOn = true;
 
 function init() {
@@ -10,6 +10,7 @@ function init() {
         renderContact(data);
         renderURLs(data);
         renderLanguages(data);
+        renderCertificatesAndCourses(data);
     });
 }
 
@@ -170,6 +171,31 @@ function renderLanguages(data) {
 
     divGroupContainer.appendChild(languageUl);
     languagesContainer.appendChild(divGroupContainer);
+}
+
+function renderCertificatesAndCourses(data) {
+    let certificationsAndCoursesContainer = document.getElementById("certificationsAndCourses");
+    let divGroupContainer = document.createElement("div");
+    divGroupContainer.classList.add("group-container");
+
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.certificates.title;
+    certificationsAndCoursesContainer.appendChild(sectionTitle);
+
+    let interestingUrlUl = document.createElement("ul");
+
+    data.certificates.items.forEach(interestingUrl => {
+        let url = document.createElement("a");
+        url.innerHTML = interestingUrl.name;
+        url.href = interestingUrl.url;
+
+        let interestingUrlLi = document.createElement("li");
+        interestingUrlLi.appendChild(url);
+        interestingUrlUl.appendChild(interestingUrlLi);
+    });
+
+    divGroupContainer.appendChild(interestingUrlUl);
+    certificationsAndCoursesContainer.appendChild(divGroupContainer);
 }
 
 function renderURLs(data) {
