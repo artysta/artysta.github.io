@@ -8,6 +8,7 @@ function init() {
         renderWorkplaces(data);
         setLastEditedAtDate(data);
         renderContact(data);
+        renderURLs(data);
     });
 }
 
@@ -147,6 +148,31 @@ function renderWorkplaces(data) {
         divGroupContainer.appendChild(divPositionsContainer);
         workplacesContainer.appendChild(divGroupContainer);
     });
+}
+
+function renderURLs(data) {
+    let interestingUrlsContainer = document.getElementById("interestingUrls");
+    let divGroupContainer = document.createElement("div");
+    divGroupContainer.classList.add("group-container");
+
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.interestingUrls.title;
+    interestingUrlsContainer.appendChild(sectionTitle);
+
+    let interestingUrlUl = document.createElement("ul");
+
+    data.interestingUrls.items.forEach(interestingUrl => {
+        let url = document.createElement("a");
+        url.innerHTML = interestingUrl.name;
+        url.href = interestingUrl.url;
+
+        let interestingUrlLi = document.createElement("li");
+        interestingUrlLi.appendChild(url);
+        interestingUrlUl.appendChild(interestingUrlLi);
+    });
+
+    divGroupContainer.appendChild(interestingUrlUl);
+    interestingUrlsContainer.appendChild(divGroupContainer);
 }
 
 function renderContact(data) {
