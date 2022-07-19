@@ -1,4 +1,4 @@
-window.onload = init;
+//window.onload = init;
 var isDarkModeOn = true;
 
 function init() {
@@ -9,6 +9,7 @@ function init() {
         setLastEditedAtDate(data);
         renderContact(data);
         renderURLs(data);
+        renderLanguages(data);
     });
 }
 
@@ -148,6 +149,27 @@ function renderWorkplaces(data) {
         divGroupContainer.appendChild(divPositionsContainer);
         workplacesContainer.appendChild(divGroupContainer);
     });
+}
+
+function renderLanguages(data) {
+    let languagesContainer = document.getElementById("languages");
+    let divGroupContainer = document.createElement("div");
+    divGroupContainer.classList.add("group-container");
+
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.languages.title;
+    languagesContainer.appendChild(sectionTitle);
+
+    let languageUl = document.createElement("ul");
+
+    data.languages.items.forEach(language => {
+        let languageLi = document.createElement("li");
+        languageLi.innerHTML = `${language.name} (${language.level})`
+        languageUl.appendChild(languageLi);
+    });
+
+    divGroupContainer.appendChild(languageUl);
+    languagesContainer.appendChild(divGroupContainer);
 }
 
 function renderURLs(data) {
