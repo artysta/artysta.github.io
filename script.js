@@ -238,8 +238,11 @@ function renderProgrammingLanguages(data) {
     languagesContainer.appendChild(sectionTitle);
 
     let div = document.createElement("div");
+    
+    let pDescription = document.createElement("p");
+    pDescription.innerHTML = data.technologies.description;
 
-    divGroupContainer.appendChild(div);
+    div.appendChild(pDescription);
 
     let divLanguagesWrapper = document.createElement("div");
     divLanguagesWrapper.classList.add("languages-wrapper");
@@ -265,7 +268,9 @@ function renderProgrammingLanguages(data) {
         divIcon.appendChild(pIcon);
         divLanguagesWrapper.appendChild(divIcon);
     });
-    divGroupContainer.appendChild(divLanguagesWrapper);
+    
+    div.appendChild(divLanguagesWrapper);
+    divGroupContainer.appendChild(div);
     languagesContainer.appendChild(divGroupContainer);
 }
 
@@ -273,6 +278,13 @@ function renderCertificatesAndCourses(data) {
     let certificationsAndCoursesContainer = document.getElementById("certificationsAndCourses");
     let divGroupContainer = document.createElement("div");
     divGroupContainer.classList.add("group-container");
+
+    let div = document.createElement("div");
+
+    let pDescription = document.createElement("p");
+    pDescription.innerHTML = data.certificates.description;
+
+    div.appendChild(pDescription);
 
     let sectionTitle = document.createElement("h2");
     sectionTitle.innerHTML = data.certificates.title;
@@ -290,7 +302,8 @@ function renderCertificatesAndCourses(data) {
         interestingUrlUl.appendChild(interestingUrlLi);
     });
 
-    divGroupContainer.appendChild(interestingUrlUl);
+    div.appendChild(interestingUrlUl);
+    divGroupContainer.appendChild(div);
     certificationsAndCoursesContainer.appendChild(divGroupContainer);
 }
 
