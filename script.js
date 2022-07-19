@@ -15,8 +15,14 @@ function init() {
         renderCertificatesAndCourses(data);
         renderEducation(data);
         renderProgrammingLanguages(data);
+        makePageVisible();
     });
 }
+
+function makePageVisible() {
+    let body = document.getElementsByTagName('body');
+    body[0].style.visibility = 'visible';
+} 
 
 function darkMode() {
     isDarkModeOn = !isDarkModeOn;
