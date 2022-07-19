@@ -1,3 +1,5 @@
+// TODO: Refactor for sure.
+
 window.onload = init;
 var isDarkModeOn = true;
 
@@ -12,6 +14,7 @@ function init() {
         renderLanguages(data);
         renderCertificatesAndCourses(data);
         renderEducation(data);
+        renderProgrammingLanguages(data);
     });
 }
 
@@ -216,6 +219,47 @@ function renderLanguages(data) {
     });
 
     divGroupContainer.appendChild(languageUl);
+    languagesContainer.appendChild(divGroupContainer);
+}
+
+function renderProgrammingLanguages(data) {
+    let languagesContainer = document.getElementById("programmingLanguages");
+    let divGroupContainer = document.createElement("div");
+    divGroupContainer.classList.add("group-container");
+
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.technologies.title;
+    languagesContainer.appendChild(sectionTitle);
+
+    let div = document.createElement("div");
+
+    divGroupContainer.appendChild(div);
+
+    let divLanguagesWrapper = document.createElement("div");
+    divLanguagesWrapper.classList.add("languages-wrapper");
+
+    data.technologies.items.forEach(technology => {
+        let divIcon = document.createElement("div");
+        divIcon.classList.add('div-image');
+        let iIcon = document.createElement("i");
+        
+        // Split if there is more than one class.
+        if (technology.class.includes(" ")) {
+            technology.class.split(' ').forEach(singleClass => {
+                iIcon.classList.add(singleClass);
+            });
+        } else {
+            iIcon.classList.add(technology.class);
+            iIcon.style.fontSize = '30px';
+        }
+        
+        divIcon.appendChild(iIcon);
+        let pIcon = document.createElement("p");
+        pIcon.innerHTML = technology.name;
+        divIcon.appendChild(pIcon);
+        divLanguagesWrapper.appendChild(divIcon);
+    });
+    divGroupContainer.appendChild(divLanguagesWrapper);
     languagesContainer.appendChild(divGroupContainer);
 }
 
