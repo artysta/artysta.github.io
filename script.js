@@ -7,6 +7,7 @@ function init() {
         renderPersonal(data);
         renderWorkplaces(data);
         setLastEditedAtDate(data);
+        renderContact(data);
     });
 }
 
@@ -146,6 +147,31 @@ function renderWorkplaces(data) {
         divGroupContainer.appendChild(divPositionsContainer);
         workplacesContainer.appendChild(divGroupContainer);
     });
+}
+
+function renderContact(data) {
+    let personalContainer = document.getElementById("contact");
+    let divGroupContainer = document.createElement("div");
+    divGroupContainer.classList.add("group-container");
+
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.contact.title;
+    personalContainer.appendChild(sectionTitle);
+
+    let personalUl = document.createElement("ul");
+
+    data.contact.items.forEach(contact => {
+        let url = document.createElement("a");
+        url.innerHTML = contact.name;
+        url.href = contact.url;
+
+        let contactLi = document.createElement("li");
+        contactLi.appendChild(url);
+        personalUl.appendChild(contactLi);
+    });
+
+    divGroupContainer.appendChild(personalUl);
+    personalContainer.appendChild(divGroupContainer);
 }
 
 function fetchResumeData() {
