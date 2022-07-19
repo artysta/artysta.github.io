@@ -11,6 +11,7 @@ function init() {
         renderURLs(data);
         renderLanguages(data);
         renderCertificatesAndCourses(data);
+        renderEducation(data);
     });
 }
 
@@ -149,6 +150,51 @@ function renderWorkplaces(data) {
         divGroupContainer.appendChild(divLogoContainer);
         divGroupContainer.appendChild(divPositionsContainer);
         workplacesContainer.appendChild(divGroupContainer);
+    });
+}
+
+function renderEducation(data) {
+    let educationContainer = document.getElementById("education");
+    let sectionTitle = document.createElement("h2");
+    sectionTitle.innerHTML = data.schools.title;
+    educationContainer.appendChild(sectionTitle);
+
+    data.schools.items.forEach(school => {
+        let divGroupContainer = document.createElement("div");
+        divGroupContainer.classList.add("group-container");
+
+        let divLogoContainer = document.createElement("div");
+        divLogoContainer.classList.add("group-logo-container");
+
+        let img = document.createElement("img");
+        img.src = school.logoUrl;
+
+        let divPositionsContainer = document.createElement("div");
+
+        school.fieldOfStudies.forEach(fieldOfStudy => {
+            // POSITION START
+            let fieldOfStudyUl = document.createElement("ul");
+            let fieldOfStudyLi = document.createElement("li");
+            fieldOfStudyLi.innerHTML = `<strong>${fieldOfStudy.dateFrom} - ${fieldOfStudy.dateThru}</strong> - ${school.name}`;
+            fieldOfStudyUl.appendChild(fieldOfStudyLi);
+
+            fieldOfStudy.details.forEach(detail => {
+                // DUTY START
+                let detailUl = document.createElement("ul");
+                let detailLi = document.createElement("li");
+                detailLi.innerHTML = detail.value;
+                detailUl.appendChild(detailLi);
+                fieldOfStudyUl.appendChild(detailUl);
+                // DUTY END
+            });
+            // POSITION END
+            divPositionsContainer.appendChild(fieldOfStudyUl);
+        });
+
+        divLogoContainer.appendChild(img);
+        divGroupContainer.appendChild(divLogoContainer);
+        divGroupContainer.appendChild(divPositionsContainer);
+        educationContainer.appendChild(divGroupContainer);
     });
 }
 
