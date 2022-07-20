@@ -22,8 +22,7 @@
             "title": "Salesforce Developer",
             "dateFrom": "09.2021",
             "dateThru": "to this day",
-            "duties": {
-              "duty": [
+            "duties": [
                 {
                   "value": "Salesforce Platform development (Apex, SOQL, declarative tools)"
                 },
@@ -34,7 +33,6 @@
                   "value": "supporting testers and DevOps teams"
                 }
               ]
-            }
           },
           {
             "title": "Junior Salesforce Developer",
@@ -78,7 +76,7 @@
         "logoUrl": "./logos/mant-light.png ",
         "positions": [
           {
-            "name": "Digital Marketing Specialist, SEO Copywriter",
+            "title": "Digital Marketing Specialist, SEO Copywriter",
             "dateFrom": "08.2016",
             "dateThru": "05.2021",
             "duties": [
@@ -94,7 +92,7 @@
             ]
           },
           {
-            "name": "Digital Marketing / SEO intern ",
+            "title": "Digital Marketing / SEO intern ",
             "dateFrom": "02.2016",
             "dateThru": "08.2016",
             "duties": [
@@ -110,7 +108,7 @@
         "logoUrl": "./icons/close-light.svg",
         "positions": [
           {
-            "name": "a very strange time in my life",
+            "title": "a very strange time in my life",
             "dateFrom": "06.2015",
             "dateThru": "02.2016",
             "duties": [
@@ -119,16 +117,6 @@
               },
               {
                 "value": "thinking a lot that it was pretty bad idea to abandon Computer Science at AGH..."
-              }
-            ]
-          },
-          {
-            "name": "Digital Marketing / SEO intern ",
-            "dateFrom": "02.2016",
-            "dateThru": "08.2016",
-            "duties": [
-              {
-                "value": "writing SEO content"
               }
             ]
           }
