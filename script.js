@@ -132,6 +132,8 @@ function renderWorkplaces(data) {
 
         let img = document.createElement("img");
         img.src = workplace.logoUrl;
+        let logoUrlParts = workplace.logoUrl.split('.');
+        img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
 
         let divPositionsContainer = document.createElement("div");
 
@@ -177,6 +179,8 @@ function renderEducation(data) {
 
         let img = document.createElement("img");
         img.src = school.logoUrl;
+        let logoUrlParts = school.logoUrl.split('.');
+        img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
 
         let divPositionsContainer = document.createElement("div");
 
