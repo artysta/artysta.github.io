@@ -16,7 +16,7 @@ body {
     font-family: monospace;
     line-height: 1.5em;
     transition: 0.4s;
-    visibility: hidden;
+    opacity: 0;
 }
 
 .body-light-mode {

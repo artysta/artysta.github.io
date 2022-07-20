@@ -21,7 +21,7 @@ function init() {
 
 function makePageVisible() {
     let body = document.getElementsByTagName('body');
-    body[0].style.visibility = 'visible';
+    body[0].style.opacity = 1;
 } 
 
 function darkMode() {
