@@ -5,6 +5,19 @@ var isDarkModeOn = true;
 
 function init() {
     fetchResumeData().then(data => {
+        if (!shouldPageBeVisible(data)) {
+            let body = document.getElementsByTagName('body')[0];
+            body.innerHTML = '';
+            let div = document.createElement('div');
+            let p = document.createElement('p');
+            p.innerText = 'Page is not available at the moment! :(';
+            div.style.display = 'flex';
+            div.style.justifyContent = 'center';
+            div.appendChild(p);
+            body.appendChild(div);
+            return;
+        }
+
         renderAbout(data);
         renderPersonal(data);
         renderWorkplaces(data);
@@ -29,6 +42,10 @@ function init() {
     }).finally(() => {
         makePageVisible();
     });
+}
+
+function shouldPageBeVisible(data) {
+    return data.siteSettings.pageVisible;
 }
 
 function makePageVisible() {
