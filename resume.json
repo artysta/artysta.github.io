@@ -1,4 +1,7 @@
 {
+  "siteSettings": {
+    "pageVisible": true
+  },
   "about": {
     "title": "About Me",
     "description": "At the moment I work as a Salesforce Developer at Accenture Poland and I learn programming languages on my own. I also study economics and computer science. "
