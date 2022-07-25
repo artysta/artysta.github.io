@@ -216,10 +216,21 @@ function renderEducation(data) {
             fieldOfStudyLi.innerHTML = `<strong>${fieldOfStudy.dateFrom} - ${fieldOfStudy.dateThru}</strong> - ${school.name}`;
             fieldOfStudyUl.appendChild(fieldOfStudyLi);
 
+            if (!school.isActive) {
+                let tmp = fieldOfStudyUl.innerHTML;
+                fieldOfStudyUl.innerHTML = `<s>${tmp}</s>`;
+            }
+
             fieldOfStudy.details.forEach(detail => {
                 let detailUl = document.createElement("ul");
                 let detailLi = document.createElement("li");
                 detailLi.innerHTML = detail.value;
+
+                if (!fieldOfStudy.isActive) {
+                    let tmp = detailLi.innerHTML;
+                    detailLi.innerHTML = `<s>${tmp}</s>`;
+                }
+
                 detailUl.appendChild(detailLi);
                 fieldOfStudyUl.appendChild(detailUl);
             });
