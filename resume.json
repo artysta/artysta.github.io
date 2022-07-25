@@ -134,10 +134,12 @@
       {
         "name": "College Of Economics And Computer Science",
         "logoUrl": "./logos/wsei-light.png",
+        "isActive": true,
         "fieldOfStudies": [
           {
             "dateFrom": "2018",
             "dateThru": "to this day",
+            "isActive": true,
             "details": [
               {
                 "value": "Computer Science (mobile & web applications development)"
@@ -152,10 +154,12 @@
       {
         "name": "AGH University of Science and Technology",
         "logoUrl": "./logos/agh-light.svg",
+        "isActive": false,
         "fieldOfStudies": [
           {
             "dateFrom": "2014",
             "dateThru": "2015 (interrupted)",
+            "isActive": false,
             "details": [
               {
                 "value": "Environmental Engineering"
@@ -168,6 +172,7 @@
           {
             "dateFrom": "2013",
             "dateThru": "2014 (interrupted)",
+            "isActive": false,
             "details": [
               {
                 "value": "Computer Science"
