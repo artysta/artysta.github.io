@@ -8,13 +8,13 @@ function init() {
         renderAbout(data);
         renderPersonal(data);
         renderWorkplaces(data);
-        setLastEditedAtDate(data);
         renderContact(data);
         renderURLs(data);
         renderLanguages(data);
         renderCertificatesAndCourses(data);
         renderEducation(data);
         renderProgrammingLanguages(data);
+        renderLastEditedAtDate();
     })
     .catch(error => {
         let body = document.getElementsByTagName('body')[0];
@@ -75,7 +75,7 @@ function darkMode() {
     }
 }
 
-function setLastEditedAtDate() {
+function renderLastEditedAtDate() {
     let footer = document.getElementsByClassName('footer')[0];
     fetch('https://api.github.com/repos/artysta/artysta.github.io/commits')
     .then(response => response.json())
