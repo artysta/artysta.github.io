@@ -15,6 +15,18 @@ function init() {
         renderCertificatesAndCourses(data);
         renderEducation(data);
         renderProgrammingLanguages(data);
+    })
+    .catch(error => {
+        let body = document.getElementsByTagName('body')[0];
+        body.innerHTML = '';
+        let div = document.createElement('div');
+        let p = document.createElement('p');
+        p.innerText = 'Could not load the page! :(';
+        div.style.display = 'flex';
+        div.style.justifyContent = 'center';
+        div.appendChild(p);
+        body.appendChild(div);
+    }).finally(() => {
         makePageVisible();
     });
 }
