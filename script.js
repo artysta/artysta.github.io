@@ -167,22 +167,19 @@ function renderWorkplaces(data) {
         let divPositionsContainer = document.createElement("div");
 
         workplace.positions.forEach(position => {
-            // POSITION START
             let positionUl = document.createElement("ul");
             let positionLi = document.createElement("li");
             positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
             positionUl.appendChild(positionLi);
 
             position.duties.forEach(duty => {
-                // DUTY START
                 let dutyUl = document.createElement("ul");
                 let dutyLi = document.createElement("li");
                 dutyLi.innerHTML = duty.value;
                 dutyUl.appendChild(dutyLi);
                 positionUl.appendChild(dutyUl);
-                // DUTY END
             });
-            // POSITION END
+            
             divPositionsContainer.appendChild(positionUl);
         });
 
@@ -214,22 +211,19 @@ function renderEducation(data) {
         let divPositionsContainer = document.createElement("div");
 
         school.fieldOfStudies.forEach(fieldOfStudy => {
-            // POSITION START
             let fieldOfStudyUl = document.createElement("ul");
             let fieldOfStudyLi = document.createElement("li");
             fieldOfStudyLi.innerHTML = `<strong>${fieldOfStudy.dateFrom} - ${fieldOfStudy.dateThru}</strong> - ${school.name}`;
             fieldOfStudyUl.appendChild(fieldOfStudyLi);
 
             fieldOfStudy.details.forEach(detail => {
-                // DUTY START
                 let detailUl = document.createElement("ul");
                 let detailLi = document.createElement("li");
                 detailLi.innerHTML = detail.value;
                 detailUl.appendChild(detailLi);
                 fieldOfStudyUl.appendChild(detailUl);
-                // DUTY END
             });
-            // POSITION END
+
             divPositionsContainer.appendChild(fieldOfStudyUl);
         });
 
