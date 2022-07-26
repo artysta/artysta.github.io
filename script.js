@@ -293,7 +293,7 @@ function renderProgrammingLanguages(data) {
             });
         } else {
             iIcon.classList.add(technology.class);
-            iIcon.style.fontSize = '30px';
+            iIcon.style.fontSize = technology.size;
         }
         
         divIcon.appendChild(iIcon);
