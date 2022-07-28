@@ -1,7 +1,9 @@
 // TODO: Refactor for sure.
 
 window.onload = init;
-var isDarkModeOn = true;
+var isDarkThemeOn = true;
+const LIGHT_THEME = 'LIGHT THEME';
+const DARK_THEME = 'DARK THEME';
 
 function init() {
     fetchResumeData().then(data => {
@@ -10,6 +12,7 @@ function init() {
             return;
         }
 
+        renderSwitchThemeButton();
         renderAbout(data);
         renderPersonal(data);
         renderWorkplaces(data);
@@ -54,13 +57,13 @@ function makePageVisible() {
     body[0].style.opacity = 1;
 } 
 
-function darkMode() {
-    isDarkModeOn = !isDarkModeOn;
+function switchTheme() {
+    isDarkThemeOn = !isDarkThemeOn;
 
     // Button.
     let button = document.getElementsByTagName("button")[0];
     button.classList.toggle("button-light-mode");
-    button.innerHTML = isDarkModeOn ? "LIGHT MODE" : "DARK MODE";
+    button.innerHTML = isDarkThemeOn ? LIGHT_THEME : DARK_THEME;
 
     // Body.
     let body = document.body;
@@ -89,8 +92,16 @@ function darkMode() {
     for (let image of images) {
         let newSrc = image.src.split('-')[0];
         let extension = image.dataset.extension;
-        image.src = isDarkModeOn ? `${newSrc}-light.${extension}` : `${newSrc}-dark.${extension}`;
+        image.src = isDarkThemeOn ? `${newSrc}-light.${extension}` : `${newSrc}-dark.${extension}`;
     }
+}
+
+function renderSwitchThemeButton() {
+    let wrapper = document.getElementsByClassName("wrapper")[0];
+    let button = document.createElement("button");
+    button.innerText = LIGHT_THEME;
+    button.onclick = switchTheme;
+    wrapper.prepend(button);
 }
 
 function renderLastEditedAtDate() {
