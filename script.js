@@ -28,6 +28,11 @@ function init() {
     });
 }
 
+function appendHrToElement(element) {
+    let hr = document.createElement('hr');
+    element.appendChild(hr);
+}
+
 function renderMessage(message) {
     let body = document.getElementsByTagName('body')[0];
     body.innerHTML = '';
@@ -114,6 +119,8 @@ function renderAbout(data) {
 
     divGroupContainer.appendChild(description);
     aboutContainer.appendChild(divGroupContainer);
+    
+    appendHrToElement(aboutContainer);
 }
 
 function renderPersonal(data) {
@@ -140,6 +147,8 @@ function renderPersonal(data) {
 
     divGroupContainer.appendChild(personalUl);
     personalContainer.appendChild(divGroupContainer);
+
+    appendHrToElement(personalContainer);
 }
 
 function renderWorkplaces(data) {
@@ -184,6 +193,8 @@ function renderWorkplaces(data) {
         divGroupContainer.appendChild(divPositionsContainer);
         workplacesContainer.appendChild(divGroupContainer);
     });
+
+    appendHrToElement(workplacesContainer);
 }
 
 function renderEducation(data) {
@@ -239,6 +250,8 @@ function renderEducation(data) {
         divGroupContainer.appendChild(divPositionsContainer);
         educationContainer.appendChild(divGroupContainer);
     });
+
+    appendHrToElement(educationContainer);
 }
 
 function renderLanguages(data) {
@@ -260,6 +273,8 @@ function renderLanguages(data) {
 
     divGroupContainer.appendChild(languageUl);
     languagesContainer.appendChild(divGroupContainer);
+
+    appendHrToElement(languagesContainer);
 }
 
 function renderProgrammingLanguages(data) {
@@ -306,6 +321,8 @@ function renderProgrammingLanguages(data) {
     div.appendChild(divLanguagesWrapper);
     divGroupContainer.appendChild(div);
     languagesContainer.appendChild(divGroupContainer);
+
+    appendHrToElement(languagesContainer);
 }
 
 function renderCertificatesAndCourses(data) {
@@ -339,6 +356,8 @@ function renderCertificatesAndCourses(data) {
     div.appendChild(interestingUrlUl);
     divGroupContainer.appendChild(div);
     certificationsAndCoursesContainer.appendChild(divGroupContainer);
+
+    appendHrToElement(certificationsAndCoursesContainer);
 }
 
 function renderURLs(data) {
@@ -364,6 +383,8 @@ function renderURLs(data) {
 
     divGroupContainer.appendChild(interestingUrlUl);
     interestingUrlsContainer.appendChild(divGroupContainer);
+
+    appendHrToElement(interestingUrlsContainer);
 }
 
 function renderContact(data) {
@@ -389,6 +410,8 @@ function renderContact(data) {
 
     divGroupContainer.appendChild(personalUl);
     personalContainer.appendChild(divGroupContainer);
+
+    appendHrToElement(personalContainer);
 }
 
 function fetchResumeData() {
