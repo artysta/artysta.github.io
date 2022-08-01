@@ -16,13 +16,13 @@ function init() {
         renderAbout(data);
         renderPersonal(data);
         renderWorkplaces(data);
-        renderContact(data);
-        renderURLs(data);
-        renderLanguages(data);
-        renderCertificatesAndCourses(data);
         renderEducation(data);
+        renderLanguages(data);
         renderProgrammingLanguages(data);
-        renderLastEditedAtDate();
+        renderCertificatesAndCourses(data);
+        renderURLs(data);
+        renderContact(data);
+        renderFooter();
     })
     .catch(error => {
         renderMessage('Could not load the page! :(');
@@ -97,27 +97,31 @@ function switchTheme() {
 }
 
 function renderSwitchThemeButton() {
-    let wrapper = document.getElementsByClassName("wrapper")[0];
+    let wrapper = document.getElementById("main-wrapper");
     let button = document.createElement("button");
     button.innerText = LIGHT_THEME;
     button.onclick = switchTheme;
     wrapper.prepend(button);
 }
 
-function renderLastEditedAtDate() {
-    let footer = document.getElementsByClassName('footer')[0];
+function renderFooter() {
+    let wrapper = document.getElementById("main-wrapper");
+    let footerContainer = document.createElement("div");
+    footerContainer.classList.add("footer");
     fetch('https://api.github.com/repos/artysta/artysta.github.io/commits')
     .then(response => response.json())
     .then(commits => {
         let latestCommit = commits[0];
         let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
-        footer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href="${latestCommit.html_url}" target="_blank">${latestCommit.sha}</a>`;
+        footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href="${latestCommit.html_url}" target="_blank">${latestCommit.sha}</a>`;
     })
-    .catch(error => footer.innerHTML = `Last edited at N/A`);
+    .catch(error => footerContainer.innerHTML = `Last edited at N/A`)
+    .finally(() => wrapper.appendChild(footerContainer));
 }
 
 function renderAbout(data) {
-    let aboutContainer = document.getElementById("about");
+    let wrapper = document.getElementById("main-wrapper");
+    let aboutContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
     divGroupContainer.classList.add("group-container");
 
@@ -132,10 +136,13 @@ function renderAbout(data) {
     aboutContainer.appendChild(divGroupContainer);
     
     appendHrToElement(aboutContainer);
+
+    wrapper.appendChild(aboutContainer);
 }
 
 function renderPersonal(data) {
-    let personalContainer = document.getElementById("personal");
+    let wrapper = document.getElementById("main-wrapper");
+    let personalContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
     divGroupContainer.classList.add("group-container");
 
@@ -160,10 +167,13 @@ function renderPersonal(data) {
     personalContainer.appendChild(divGroupContainer);
 
     appendHrToElement(personalContainer);
+
+    wrapper.appendChild(personalContainer);
 }
 
 function renderWorkplaces(data) {
-    let workplacesContainer = document.getElementById("workplaces");
+    let wrapper = document.getElementById("main-wrapper");
+    let workplacesContainer = document.createElement("div");
     let sectionTitle = document.createElement("h2");
     sectionTitle.innerHTML = data.workplaces.title;
     workplacesContainer.appendChild(sectionTitle);
@@ -206,10 +216,13 @@ function renderWorkplaces(data) {
     });
 
     appendHrToElement(workplacesContainer);
+
+    wrapper.appendChild(workplacesContainer);
 }
 
 function renderEducation(data) {
-    let educationContainer = document.getElementById("education");
+    let wrapper = document.getElementById("main-wrapper");
+    let educationContainer = document.createElement("div");
     let sectionTitle = document.createElement("h2");
     sectionTitle.innerHTML = data.schools.title;
     educationContainer.appendChild(sectionTitle);
@@ -263,10 +276,13 @@ function renderEducation(data) {
     });
 
     appendHrToElement(educationContainer);
+
+    wrapper.appendChild(educationContainer);
 }
 
 function renderLanguages(data) {
-    let languagesContainer = document.getElementById("languages");
+    let wrapper = document.getElementById("main-wrapper");
+    let languagesContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
     divGroupContainer.classList.add("group-container");
 
@@ -286,10 +302,13 @@ function renderLanguages(data) {
     languagesContainer.appendChild(divGroupContainer);
 
     appendHrToElement(languagesContainer);
+
+    wrapper.appendChild(languagesContainer);
 }
 
 function renderProgrammingLanguages(data) {
-    let languagesContainer = document.getElementById("programmingLanguages");
+    let wrapper = document.getElementById("main-wrapper");
+    let languagesContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
     divGroupContainer.classList.add("group-container");
 
@@ -334,10 +353,13 @@ function renderProgrammingLanguages(data) {
     languagesContainer.appendChild(divGroupContainer);
 
     appendHrToElement(languagesContainer);
+
+    wrapper.appendChild(languagesContainer);
 }
 
 function renderCertificatesAndCourses(data) {
-    let certificationsAndCoursesContainer = document.getElementById("certificationsAndCourses");
+    let wrapper = document.getElementById("main-wrapper");
+    let certificationsAndCoursesContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
     divGroupContainer.classList.add("group-container");
 
@@ -369,10 +391,13 @@ function renderCertificatesAndCourses(data) {
     certificationsAndCoursesContainer.appendChild(divGroupContainer);
 
     appendHrToElement(certificationsAndCoursesContainer);
+
+    wrapper.appendChild(certificationsAndCoursesContainer);
 }
 
 function renderURLs(data) {
-    let interestingUrlsContainer = document.getElementById("interestingUrls");
+    let wrapper = document.getElementById("main-wrapper");
+    let interestingUrlsContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
     divGroupContainer.classList.add("group-container");
 
@@ -396,10 +421,13 @@ function renderURLs(data) {
     interestingUrlsContainer.appendChild(divGroupContainer);
 
     appendHrToElement(interestingUrlsContainer);
+
+    wrapper.appendChild(interestingUrlsContainer);
 }
 
 function renderContact(data) {
-    let personalContainer = document.getElementById("contact");
+    let wrapper = document.getElementById("main-wrapper");
+    let personalContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
     divGroupContainer.classList.add("group-container");
 
@@ -423,6 +451,8 @@ function renderContact(data) {
     personalContainer.appendChild(divGroupContainer);
 
     appendHrToElement(personalContainer);
+
+    wrapper.appendChild(personalContainer);
 }
 
 function fetchResumeData() {
