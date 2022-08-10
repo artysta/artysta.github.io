@@ -12,6 +12,7 @@ function init() {
             return;
         }
 
+        renderMainWrapper();
         renderSwitchThemeButton();
         renderAbout(data);
         renderPersonal(data);
@@ -117,6 +118,14 @@ function renderFooter() {
     })
     .catch(error => footerContainer.innerHTML = `Last edited at N/A`)
     .finally(() => wrapper.appendChild(footerContainer));
+}
+
+function renderMainWrapper() {
+    let mainWrapper = document.createElement("div");
+    mainWrapper.id = 'main-wrapper';
+    mainWrapper.classList.add("wrapper");
+    let body = document.getElementsByTagName("body")[0];
+    body.appendChild(mainWrapper);
 }
 
 function renderAbout(data) {
