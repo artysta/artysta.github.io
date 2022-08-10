@@ -456,5 +456,5 @@ function renderContact(data) {
 }
 
 function fetchResumeData() {
-    return fetch("resume.json").then(response => response.json());
+    return fetch("https://adriankurek.pl/resume.json").then(response => response.json());
 }
