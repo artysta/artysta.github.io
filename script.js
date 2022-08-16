@@ -129,6 +129,8 @@ function renderMainWrapper() {
 }
 
 function renderAbout(data) {
+    if (!data.about.sectionVisible) { return; }
+    
     let wrapper = document.getElementById("main-wrapper");
     let aboutContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
@@ -150,6 +152,8 @@ function renderAbout(data) {
 }
 
 function renderPersonal(data) {
+    if (!data.personal.sectionVisible) { return; }
+
     let wrapper = document.getElementById("main-wrapper");
     let personalContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
@@ -181,6 +185,8 @@ function renderPersonal(data) {
 }
 
 function renderWorkplaces(data) {
+    if (!data.workplaces.sectionVisible) { return; }
+
     let wrapper = document.getElementById("main-wrapper");
     let workplacesContainer = document.createElement("div");
     let sectionTitle = document.createElement("h2");
@@ -230,6 +236,8 @@ function renderWorkplaces(data) {
 }
 
 function renderEducation(data) {
+    if (!data.schools.sectionVisible) { return; }
+
     let wrapper = document.getElementById("main-wrapper");
     let educationContainer = document.createElement("div");
     let sectionTitle = document.createElement("h2");
@@ -290,6 +298,8 @@ function renderEducation(data) {
 }
 
 function renderLanguages(data) {
+    if (!data.languages.sectionVisible) { return; }
+
     let wrapper = document.getElementById("main-wrapper");
     let languagesContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
@@ -316,6 +326,8 @@ function renderLanguages(data) {
 }
 
 function renderProgrammingLanguages(data) {
+    if (!data.technologies.sectionVisible) { return; }
+
     let wrapper = document.getElementById("main-wrapper");
     let languagesContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
@@ -367,6 +379,8 @@ function renderProgrammingLanguages(data) {
 }
 
 function renderCertificatesAndCourses(data) {
+    if (!data.certificates.sectionVisible) { return; }
+
     let wrapper = document.getElementById("main-wrapper");
     let certificationsAndCoursesContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
@@ -405,6 +419,8 @@ function renderCertificatesAndCourses(data) {
 }
 
 function renderURLs(data) {
+    if (!data.interestingUrls.sectionVisible) { return; }
+
     let wrapper = document.getElementById("main-wrapper");
     let interestingUrlsContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
@@ -435,6 +451,8 @@ function renderURLs(data) {
 }
 
 function renderContact(data) {
+    if (!data.contact.sectionVisible) { return; }
+
     let wrapper = document.getElementById("main-wrapper");
     let personalContainer = document.createElement("div");
     let divGroupContainer = document.createElement("div");
