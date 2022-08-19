@@ -39,15 +39,15 @@ function appendHrToElement(element) {
 }
 
 function renderMessage(message) {
-    let body = document.getElementsByTagName('body')[0];
-    body.innerHTML = '';
+    let content = document.getElementsByClassName('content')[0];
+    content.innerHTML = '';
     let div = document.createElement('div');
     let p = document.createElement('p');
     p.innerText = message;
     div.style.display = 'flex';
     div.style.justifyContent = 'center';
     div.appendChild(p);
-    body.appendChild(div);
+    content.appendChild(div);
 }
 
 function shouldPageBeVisible(data) {
