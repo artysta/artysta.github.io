@@ -12,6 +12,7 @@ function init() {
             return;
         }
 
+        makeLoaderVisible(true);
         renderMainWrapper();
         renderSwitchThemeButton();
         renderAbout(data);
@@ -28,7 +29,7 @@ function init() {
     .catch(error => {
         renderMessage('Could not load the page! :(');
     }).finally(() => {
-        makePageVisible();
+        setTimeout(makePageVisible, 1000);
     });
 }
 
@@ -54,9 +55,16 @@ function shouldPageBeVisible(data) {
 }
 
 function makePageVisible() {
-    let body = document.getElementsByTagName('body');
-    body[0].style.opacity = 1;
-} 
+    let content = document.getElementsByClassName('content');
+    content[0].style.opacity = 1;
+    makeLoaderVisible(false);
+}
+
+function makeLoaderVisible(visible) {
+    let loader = document.getElementById('loader');
+    loader.style.display = visible ? 'block' : 'none';
+    
+}
 
 function switchTheme() {
     isDarkThemeOn = !isDarkThemeOn;
@@ -124,8 +132,8 @@ function renderMainWrapper() {
     let mainWrapper = document.createElement("div");
     mainWrapper.id = 'main-wrapper';
     mainWrapper.classList.add("wrapper");
-    let body = document.getElementsByTagName("body")[0];
-    body.appendChild(mainWrapper);
+    let content = document.getElementsByClassName("content")[0];
+    content.appendChild(mainWrapper);
 }
 
 function renderAbout(data) {

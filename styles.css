@@ -9,6 +9,11 @@
     --main-light-accent-color: #a600ff;
 }
 
+.content {
+    transition: 0.4s;
+    opacity: 0;
+}
+
 body {
     margin: 0;
     background-color: var(--main-background-color);
@@ -16,7 +21,6 @@ body {
     font-family: monospace;
     line-height: 1.5em;
     transition: 0.4s;
-    opacity: 0;
 }
 
 .body-light-mode {
@@ -155,4 +159,35 @@ button:hover, button:focus {
     color: var(--main-accent-color);
     transition: 0.4s;
     outline: 0px;
+}
+
+/* Those loader related classes come from https://loading.io/css/. */
+
+.lds-dual-ring {
+    width: 80px;
+    height: 80px;
+    transition: 0.4s;
+    margin: 25% auto;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+    transition: 0.4s;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
