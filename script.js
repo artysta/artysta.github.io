@@ -69,35 +69,29 @@ function makeLoaderVisible(visible) {
 function switchTheme() {
     isDarkThemeOn = !isDarkThemeOn;
 
-    // Button.
-    let button = document.getElementsByTagName("button")[0];
-    button.classList.toggle("button-light-mode");
+    let button = document.getElementsByTagName('button')[0];
+    button.classList.toggle('button-light-mode');
     button.innerHTML = isDarkThemeOn ? LIGHT_THEME : DARK_THEME;
 
-    // Body.
     let body = document.body;
-    body.classList.toggle("body-light-mode");
+    body.classList.toggle('body-light-mode');
 
-    // Group containers.
-    let groupContainers = document.getElementsByClassName("group-container");
+    let groupContainers = document.getElementsByClassName('group-container');
     for (let groupContainer of groupContainers) {
-        groupContainer.classList.toggle("group-container-light-mode");
+        groupContainer.classList.toggle('group-container-light-mode');
     }
 
-    // URLs.
-    let urls = document.getElementsByTagName("a");
+    let urls = document.getElementsByTagName('a');
     for (let url of urls) {
-        url.classList.toggle("a-light-mode");
+        url.classList.toggle('a-light-mode');
     }
 
-    // Horizontal lines.
-    let hrs = document.getElementsByTagName("hr");
+    let hrs = document.getElementsByTagName('hr');
     for (let hr of hrs) {
-        hr.classList.toggle("hr-light-mode");
+        hr.classList.toggle('hr-light-mode');
     }
 
-    // Images.
-    let images = document.getElementsByTagName("img");
+    let images = document.getElementsByTagName('img');
     for (let image of images) {
         let newSrc = image.src.split('-')[0];
         let extension = image.dataset.extension;
@@ -106,49 +100,49 @@ function switchTheme() {
 }
 
 function renderSwitchThemeButton() {
-    let wrapper = document.getElementById("main-wrapper");
-    let button = document.createElement("button");
+    let wrapper = document.getElementById('main-wrapper');
+    let button = document.createElement('button');
     button.innerText = LIGHT_THEME;
     button.onclick = switchTheme;
     wrapper.prepend(button);
 }
 
 function renderFooter() {
-    let wrapper = document.getElementById("main-wrapper");
-    let footerContainer = document.createElement("div");
-    footerContainer.classList.add("footer");
+    let wrapper = document.getElementById('main-wrapper');
+    let footerContainer = document.createElement('div');
+    footerContainer.classList.add('footer');
     fetch('https://api.github.com/repos/artysta/artysta.github.io/commits')
     .then(response => response.json())
     .then(commits => {
         let latestCommit = commits[0];
         let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
-        footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href="${latestCommit.html_url}" target="_blank">${latestCommit.sha}</a>`;
+        footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href='${latestCommit.html_url}' target='_blank'>${latestCommit.sha}</a>`;
     })
     .catch(error => footerContainer.innerHTML = `Last edited at N/A`)
     .finally(() => wrapper.appendChild(footerContainer));
 }
 
 function renderMainWrapper() {
-    let mainWrapper = document.createElement("div");
+    let mainWrapper = document.createElement('div');
     mainWrapper.id = 'main-wrapper';
-    mainWrapper.classList.add("wrapper");
-    let content = document.getElementsByClassName("content")[0];
+    mainWrapper.classList.add('wrapper');
+    let content = document.getElementsByClassName('content')[0];
     content.appendChild(mainWrapper);
 }
 
 function renderAbout(data) {
     if (!data.about.sectionVisible) { return; }
     
-    let wrapper = document.getElementById("main-wrapper");
-    let aboutContainer = document.createElement("div");
-    let divGroupContainer = document.createElement("div");
-    divGroupContainer.classList.add("group-container");
+    let wrapper = document.getElementById('main-wrapper');
+    let aboutContainer = document.createElement('div');
+    let divGroupContainer = document.createElement('div');
+    divGroupContainer.classList.add('group-container');
 
-    let sectionTitle = document.createElement("h2");
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.about.title;
     aboutContainer.appendChild(sectionTitle);
 
-    let description = document.createElement("p");
+    let description = document.createElement('p');
     description.innerHTML = data.about.description;
 
     divGroupContainer.appendChild(description);
@@ -162,25 +156,25 @@ function renderAbout(data) {
 function renderPersonal(data) {
     if (!data.personal.sectionVisible) { return; }
 
-    let wrapper = document.getElementById("main-wrapper");
-    let personalContainer = document.createElement("div");
-    let divGroupContainer = document.createElement("div");
-    divGroupContainer.classList.add("group-container");
+    let wrapper = document.getElementById('main-wrapper');
+    let personalContainer = document.createElement('div');
+    let divGroupContainer = document.createElement('div');
+    divGroupContainer.classList.add('group-container');
 
-    let sectionTitle = document.createElement("h2");
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.personal.title;
     personalContainer.appendChild(sectionTitle);
 
-    let personalUl = document.createElement("ul");
-    let nameLi = document.createElement("li");
+    let personalUl = document.createElement('ul');
+    let nameLi = document.createElement('li');
     nameLi.innerHTML = data.personal.name;
     personalUl.appendChild(nameLi);
 
-    let birthYearLi = document.createElement("li");
+    let birthYearLi = document.createElement('li');
     birthYearLi.innerHTML = data.personal.birthYear;
     personalUl.appendChild(birthYearLi);
 
-    let nationalityLi = document.createElement("li");
+    let nationalityLi = document.createElement('li');
     nationalityLi.innerHTML = data.personal.nationality;
     personalUl.appendChild(nationalityLi);
 
@@ -195,35 +189,35 @@ function renderPersonal(data) {
 function renderWorkplaces(data) {
     if (!data.workplaces.sectionVisible) { return; }
 
-    let wrapper = document.getElementById("main-wrapper");
-    let workplacesContainer = document.createElement("div");
-    let sectionTitle = document.createElement("h2");
+    let wrapper = document.getElementById('main-wrapper');
+    let workplacesContainer = document.createElement('div');
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.workplaces.title;
     workplacesContainer.appendChild(sectionTitle);
 
     data.workplaces.items.forEach(workplace => {
-        let divGroupContainer = document.createElement("div");
-        divGroupContainer.classList.add("group-container");
+        let divGroupContainer = document.createElement('div');
+        divGroupContainer.classList.add('group-container');
 
-        let divLogoContainer = document.createElement("div");
-        divLogoContainer.classList.add("group-logo-container");
+        let divLogoContainer = document.createElement('div');
+        divLogoContainer.classList.add('group-logo-container');
 
-        let img = document.createElement("img");
+        let img = document.createElement('img');
         img.src = workplace.logoUrl;
         let logoUrlParts = workplace.logoUrl.split('.');
         img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
 
-        let divPositionsContainer = document.createElement("div");
+        let divPositionsContainer = document.createElement('div');
 
         workplace.positions.forEach(position => {
-            let positionUl = document.createElement("ul");
-            let positionLi = document.createElement("li");
+            let positionUl = document.createElement('ul');
+            let positionLi = document.createElement('li');
             positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
             positionUl.appendChild(positionLi);
 
             position.duties.forEach(duty => {
-                let dutyUl = document.createElement("ul");
-                let dutyLi = document.createElement("li");
+                let dutyUl = document.createElement('ul');
+                let dutyLi = document.createElement('li');
                 dutyLi.innerHTML = duty.value;
                 dutyUl.appendChild(dutyLi);
                 positionUl.appendChild(dutyUl);
@@ -246,29 +240,29 @@ function renderWorkplaces(data) {
 function renderEducation(data) {
     if (!data.schools.sectionVisible) { return; }
 
-    let wrapper = document.getElementById("main-wrapper");
-    let educationContainer = document.createElement("div");
-    let sectionTitle = document.createElement("h2");
+    let wrapper = document.getElementById('main-wrapper');
+    let educationContainer = document.createElement('div');
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.schools.title;
     educationContainer.appendChild(sectionTitle);
 
     data.schools.items.forEach(school => {
-        let divGroupContainer = document.createElement("div");
-        divGroupContainer.classList.add("group-container");
+        let divGroupContainer = document.createElement('div');
+        divGroupContainer.classList.add('group-container');
 
-        let divLogoContainer = document.createElement("div");
-        divLogoContainer.classList.add("group-logo-container");
+        let divLogoContainer = document.createElement('div');
+        divLogoContainer.classList.add('group-logo-container');
 
-        let img = document.createElement("img");
+        let img = document.createElement('img');
         img.src = school.logoUrl;
         let logoUrlParts = school.logoUrl.split('.');
         img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
 
-        let divPositionsContainer = document.createElement("div");
+        let divPositionsContainer = document.createElement('div');
 
         school.fieldOfStudies.forEach(fieldOfStudy => {
-            let fieldOfStudyUl = document.createElement("ul");
-            let fieldOfStudyLi = document.createElement("li");
+            let fieldOfStudyUl = document.createElement('ul');
+            let fieldOfStudyLi = document.createElement('li');
             fieldOfStudyLi.innerHTML = `<strong>${fieldOfStudy.dateFrom} - ${fieldOfStudy.dateThru}</strong> - ${school.name}`;
             fieldOfStudyUl.appendChild(fieldOfStudyLi);
 
@@ -278,8 +272,8 @@ function renderEducation(data) {
             }
 
             fieldOfStudy.details.forEach(detail => {
-                let detailUl = document.createElement("ul");
-                let detailLi = document.createElement("li");
+                let detailUl = document.createElement('ul');
+                let detailLi = document.createElement('li');
                 detailLi.innerHTML = detail.value;
 
                 if (!fieldOfStudy.isActive) {
@@ -308,19 +302,19 @@ function renderEducation(data) {
 function renderLanguages(data) {
     if (!data.languages.sectionVisible) { return; }
 
-    let wrapper = document.getElementById("main-wrapper");
-    let languagesContainer = document.createElement("div");
-    let divGroupContainer = document.createElement("div");
-    divGroupContainer.classList.add("group-container");
+    let wrapper = document.getElementById('main-wrapper');
+    let languagesContainer = document.createElement('div');
+    let divGroupContainer = document.createElement('div');
+    divGroupContainer.classList.add('group-container');
 
-    let sectionTitle = document.createElement("h2");
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.languages.title;
     languagesContainer.appendChild(sectionTitle);
 
-    let languageUl = document.createElement("ul");
+    let languageUl = document.createElement('ul');
 
     data.languages.items.forEach(language => {
-        let languageLi = document.createElement("li");
+        let languageLi = document.createElement('li');
         languageLi.innerHTML = `${language.name} (${language.level})`
         languageUl.appendChild(languageLi);
     });
@@ -336,32 +330,32 @@ function renderLanguages(data) {
 function renderProgrammingLanguages(data) {
     if (!data.technologies.sectionVisible) { return; }
 
-    let wrapper = document.getElementById("main-wrapper");
-    let languagesContainer = document.createElement("div");
-    let divGroupContainer = document.createElement("div");
-    divGroupContainer.classList.add("group-container");
+    let wrapper = document.getElementById('main-wrapper');
+    let languagesContainer = document.createElement('div');
+    let divGroupContainer = document.createElement('div');
+    divGroupContainer.classList.add('group-container');
 
-    let sectionTitle = document.createElement("h2");
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.technologies.title;
     languagesContainer.appendChild(sectionTitle);
 
-    let div = document.createElement("div");
+    let div = document.createElement('div');
     
-    let pDescription = document.createElement("p");
+    let pDescription = document.createElement('p');
     pDescription.innerHTML = data.technologies.description;
 
     div.appendChild(pDescription);
 
-    let divLanguagesWrapper = document.createElement("div");
-    divLanguagesWrapper.classList.add("languages-wrapper");
+    let divLanguagesWrapper = document.createElement('div');
+    divLanguagesWrapper.classList.add('languages-wrapper');
 
     data.technologies.items.forEach(technology => {
-        let divIcon = document.createElement("div");
+        let divIcon = document.createElement('div');
         divIcon.classList.add('div-image');
-        let iIcon = document.createElement("i");
+        let iIcon = document.createElement('i');
         
         // Split if there is more than one class.
-        if (technology.class.includes(" ")) {
+        if (technology.class.includes(' ')) {
             technology.class.split(' ').forEach(singleClass => {
                 iIcon.classList.add(singleClass);
             });
@@ -371,7 +365,7 @@ function renderProgrammingLanguages(data) {
         }
         
         divIcon.appendChild(iIcon);
-        let pIcon = document.createElement("p");
+        let pIcon = document.createElement('p');
         pIcon.innerHTML = technology.name;
         divIcon.appendChild(pIcon);
         divLanguagesWrapper.appendChild(divIcon);
@@ -389,30 +383,30 @@ function renderProgrammingLanguages(data) {
 function renderCertificatesAndCourses(data) {
     if (!data.certificates.sectionVisible) { return; }
 
-    let wrapper = document.getElementById("main-wrapper");
-    let certificationsAndCoursesContainer = document.createElement("div");
-    let divGroupContainer = document.createElement("div");
-    divGroupContainer.classList.add("group-container");
+    let wrapper = document.getElementById('main-wrapper');
+    let certificationsAndCoursesContainer = document.createElement('div');
+    let divGroupContainer = document.createElement('div');
+    divGroupContainer.classList.add('group-container');
 
-    let div = document.createElement("div");
+    let div = document.createElement('div');
 
-    let pDescription = document.createElement("p");
+    let pDescription = document.createElement('p');
     pDescription.innerHTML = data.certificates.description;
 
     div.appendChild(pDescription);
 
-    let sectionTitle = document.createElement("h2");
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.certificates.title;
     certificationsAndCoursesContainer.appendChild(sectionTitle);
 
-    let interestingUrlUl = document.createElement("ul");
+    let interestingUrlUl = document.createElement('ul');
 
     data.certificates.items.forEach(interestingUrl => {
-        let url = document.createElement("a");
+        let url = document.createElement('a');
         url.innerHTML = interestingUrl.name;
         url.href = interestingUrl.url;
 
-        let interestingUrlLi = document.createElement("li");
+        let interestingUrlLi = document.createElement('li');
         interestingUrlLi.appendChild(url);
         interestingUrlUl.appendChild(interestingUrlLi);
     });
@@ -429,23 +423,23 @@ function renderCertificatesAndCourses(data) {
 function renderURLs(data) {
     if (!data.interestingUrls.sectionVisible) { return; }
 
-    let wrapper = document.getElementById("main-wrapper");
-    let interestingUrlsContainer = document.createElement("div");
-    let divGroupContainer = document.createElement("div");
-    divGroupContainer.classList.add("group-container");
+    let wrapper = document.getElementById('main-wrapper');
+    let interestingUrlsContainer = document.createElement('div');
+    let divGroupContainer = document.createElement('div');
+    divGroupContainer.classList.add('group-container');
 
-    let sectionTitle = document.createElement("h2");
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.interestingUrls.title;
     interestingUrlsContainer.appendChild(sectionTitle);
 
-    let interestingUrlUl = document.createElement("ul");
+    let interestingUrlUl = document.createElement('ul');
 
     data.interestingUrls.items.forEach(interestingUrl => {
-        let url = document.createElement("a");
+        let url = document.createElement('a');
         url.innerHTML = interestingUrl.name;
         url.href = interestingUrl.url;
 
-        let interestingUrlLi = document.createElement("li");
+        let interestingUrlLi = document.createElement('li');
         interestingUrlLi.appendChild(url);
         interestingUrlUl.appendChild(interestingUrlLi);
     });
@@ -461,23 +455,23 @@ function renderURLs(data) {
 function renderContact(data) {
     if (!data.contact.sectionVisible) { return; }
 
-    let wrapper = document.getElementById("main-wrapper");
-    let personalContainer = document.createElement("div");
-    let divGroupContainer = document.createElement("div");
-    divGroupContainer.classList.add("group-container");
+    let wrapper = document.getElementById('main-wrapper');
+    let personalContainer = document.createElement('div');
+    let divGroupContainer = document.createElement('div');
+    divGroupContainer.classList.add('group-container');
 
-    let sectionTitle = document.createElement("h2");
+    let sectionTitle = document.createElement('h2');
     sectionTitle.innerHTML = data.contact.title;
     personalContainer.appendChild(sectionTitle);
 
-    let personalUl = document.createElement("ul");
+    let personalUl = document.createElement('ul');
 
     data.contact.items.forEach(contact => {
-        let url = document.createElement("a");
+        let url = document.createElement('a');
         url.innerHTML = contact.name;
         url.href = contact.url;
 
-        let contactLi = document.createElement("li");
+        let contactLi = document.createElement('li');
         contactLi.appendChild(url);
         personalUl.appendChild(contactLi);
     });
@@ -491,5 +485,5 @@ function renderContact(data) {
 }
 
 function fetchResumeData() {
-    return fetch("https://adriankurek.pl/resume.json").then(response => response.json());
+    return fetch('https://adriankurek.pl/resume.json').then(response => response.json());
 }
