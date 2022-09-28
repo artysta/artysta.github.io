@@ -28,7 +28,7 @@ function init() {
     }).catch(error => {
         renderMessage('Could not load the page! :(');
     }).finally(() => {
-        setTimeout(makePageVisible, 1000);
+        setTimeout(makePageVisible, 200);
     });
 }
 
@@ -42,6 +42,16 @@ function createElement(element, classList) {
     }
 
     return newElement;
+}
+
+function createUrlElement(innerHtml, href, target) {
+    let urlElement = createElement('a');
+
+    urlElement.innerHTML = innerHtml;
+    urlElement.href = href;
+    urlElement.target = target;
+
+    return urlElement;
 }
 
 function appendHrToElement(element) {
@@ -399,11 +409,7 @@ function renderCertificatesAndCourses(data) {
     let interestingUrlUl = document.createElement('ul');
 
     data.certificates.items.forEach(interestingUrl => {
-        let url = document.createElement('a');
-        url.innerHTML = interestingUrl.name;
-        url.href = interestingUrl.url;
-        url.target = '_blank';
-
+        let url = createUrlElement(interestingUrl.name, interestingUrl.url, '_blank');
         let interestingUrlLi = document.createElement('li');
         interestingUrlLi.appendChild(url);
         interestingUrlUl.appendChild(interestingUrlLi);
@@ -432,10 +438,7 @@ function renderURLs(data) {
     let interestingUrlUl = document.createElement('ul');
 
     data.interestingUrls.items.forEach(interestingUrl => {
-        let url = document.createElement('a');
-        url.innerHTML = interestingUrl.name;
-        url.href = interestingUrl.url;
-        url.target = '_blank';
+        let url = createUrlElement(interestingUrl.name, interestingUrl.url, '_blank');
 
         let interestingUrlLi = document.createElement('li');
         interestingUrlLi.appendChild(url);
@@ -464,10 +467,7 @@ function renderContact(data) {
     let personalUl = document.createElement('ul');
 
     data.contact.items.forEach(contact => {
-        let url = document.createElement('a');
-        url.innerHTML = contact.name;
-        url.href = contact.url;
-
+        let url = createUrlElement(contact.name, contact.url, '_blank');
         let contactLi = document.createElement('li');
         contactLi.appendChild(url);
         personalUl.appendChild(contactLi);
