@@ -263,7 +263,7 @@ function renderEducation(data) {
 
     data.schools.items.forEach(school => {
         let divGroupContainer = createElement('div', ['group-container']);
-        let divLogoContainer = createElement('div', ['group-container']);
+        let divLogoContainer = createElement('div', ['group-logo-container']);
 
         let img = document.createElement('img');
         img.src = school.logoUrl;
