@@ -159,6 +159,12 @@ window.onload = () => {
         sectionTitle.innerHTML = data.personal.title;
         personalContainer.appendChild(sectionTitle);
 
+        let div = createElement('div');
+        let description = createElement('p');
+        description.innerHTML = data.personal.description;
+
+        div.appendChild(description);
+
         let personalUl = createElement('ul');
         let nameLi = createElement('li');
         nameLi.innerHTML = data.personal.name;
@@ -172,7 +178,8 @@ window.onload = () => {
         nationalityLi.innerHTML = data.personal.nationality;
         personalUl.appendChild(nationalityLi);
 
-        divGroupContainer.appendChild(personalUl);
+        div.appendChild(personalUl);
+        divGroupContainer.appendChild(div);
         personalContainer.appendChild(divGroupContainer);
 
         appendHrToElement(personalContainer);
@@ -295,6 +302,12 @@ window.onload = () => {
         sectionTitle.innerHTML = data.languages.title;
         languagesContainer.appendChild(sectionTitle);
 
+        let div = createElement('div');
+        let description = createElement('p');
+        description.innerHTML = data.languages.description;
+
+        div.appendChild(description);
+
         let languageUl = createElement('ul');
 
         data.languages.items.forEach(language => {
@@ -303,7 +316,8 @@ window.onload = () => {
             languageUl.appendChild(languageLi);
         });
 
-        divGroupContainer.appendChild(languageUl);
+        div.appendChild(languageUl);
+        divGroupContainer.appendChild(div);
         languagesContainer.appendChild(divGroupContainer);
 
         appendHrToElement(languagesContainer);
@@ -403,6 +417,12 @@ window.onload = () => {
         sectionTitle.innerHTML = data.interestingUrls.title;
         interestingUrlsContainer.appendChild(sectionTitle);
 
+        let div = createElement('div');
+        let description = createElement('p');
+        description.innerHTML = data.interestingUrls.description;
+
+        div.appendChild(description);
+
         let interestingUrlUl = createElement('ul');
 
         data.interestingUrls.items.forEach(interestingUrl => {
@@ -413,7 +433,8 @@ window.onload = () => {
             interestingUrlUl.appendChild(interestingUrlLi);
         });
 
-        divGroupContainer.appendChild(interestingUrlUl);
+        div.appendChild(interestingUrlUl);
+        divGroupContainer.appendChild(div);
         interestingUrlsContainer.appendChild(divGroupContainer);
 
         appendHrToElement(interestingUrlsContainer);
@@ -431,6 +452,12 @@ window.onload = () => {
         sectionTitle.innerHTML = data.contact.title;
         personalContainer.appendChild(sectionTitle);
 
+        let div = createElement('div');
+        let description = createElement('p');
+        description.innerHTML = data.contact.description;
+
+        div.appendChild(description);
+
         let personalUl = createElement('ul');
 
         data.contact.items.forEach(contact => {
@@ -440,7 +467,8 @@ window.onload = () => {
             personalUl.appendChild(contactLi);
         });
 
-        divGroupContainer.appendChild(personalUl);
+        div.appendChild(personalUl);
+        divGroupContainer.appendChild(div);
         personalContainer.appendChild(divGroupContainer);
 
         appendHrToElement(personalContainer);
