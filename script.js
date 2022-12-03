@@ -42,16 +42,6 @@ function createElement(element, classList) {
     return newElement;
 }
 
-function createUrlElement(innerHtml, href, target) {
-    let urlElement = createElement('a');
-
-    urlElement.innerHTML = innerHtml;
-    urlElement.href = href;
-    urlElement.target = target;
-
-    return urlElement;
-}
-
 function appendHrToElement(element) {
     let hr = createElement('hr');
     element.appendChild(hr);
@@ -125,54 +115,6 @@ function renderFooter() {
         })
         .catch(error => footerContainer.innerHTML = `Last edited at N/A`)
         .finally(() => wrapper.appendChild(footerContainer));
-}
-
-function renderAbout(data) {
-    if (!data.about.sectionVisible) { return; }
-
-    let aboutContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let description = createElement('p');
-
-    sectionTitle.innerHTML = data.about.title;
-    description.innerHTML = data.about.description;
-
-    aboutContainer.appendChild(sectionTitle);
-    divGroupContainer.appendChild(description);
-    aboutContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(aboutContainer);
-
-    appendHrToElement(aboutContainer);
-}
-
-function renderPersonal(data) {
-    if (!data.personal.sectionVisible) { return; }
-
-    let personalContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let infoUl = createElement('ul');
-
-    data.personal.items.forEach(info => {
-        let infoLi = createElement('li');
-        infoLi.innerHTML = info.value;
-        infoUl.appendChild(infoLi);
-    });
-
-    sectionTitle.innerHTML = data.personal.title;
-    description.innerHTML = data.personal.description;
-
-    personalContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(infoUl);
-    divGroupContainer.appendChild(div);
-    personalContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(personalContainer);
-
-    appendHrToElement(personalContainer);
 }
 
 function renderWorkplaces(data) {
@@ -288,36 +230,6 @@ function renderEducation(data) {
     appendHrToElement(educationContainer);
 }
 
-function renderLanguages(data) {
-    if (!data.languages.sectionVisible) { return; }
-
-    let languagesContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let languageUl = createElement('ul');
-
-    sectionTitle.innerHTML = data.languages.title;
-    description.innerHTML = data.languages.description;
-
-    data.languages.items.forEach(language => {
-        let languageLi = createElement('li');
-        languageLi.innerHTML = `${language.name} (${language.level})`
-        languageUl.appendChild(languageLi);
-    });
-
-
-    languagesContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(languageUl);
-    divGroupContainer.appendChild(div);
-    languagesContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(languagesContainer);
-
-    appendHrToElement(languagesContainer);
-}
-
 function renderProgrammingLanguages(data) {
     if (!data.technologies.sectionVisible) { return; }
 
@@ -360,97 +272,6 @@ function renderProgrammingLanguages(data) {
     appendHrToElement(languagesContainer);
 }
 
-function renderSoftSkills(data) {
-    if (!data.softSkills.sectionVisible) { return; }
-
-    let softSkillsContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let softSkillUl = createElement('ul');
-
-    sectionTitle.innerHTML = data.softSkills.title;
-    description.innerHTML = data.softSkills.description;
-
-    data.softSkills.items.forEach(softSkill => {
-        let softSkillLi = createElement('li');
-        softSkillLi.innerHTML = softSkill.value;
-        softSkillUl.appendChild(softSkillLi);
-    });
-
-    softSkillsContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(softSkillUl);
-    divGroupContainer.appendChild(div);
-    softSkillsContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(softSkillsContainer);
-
-    appendHrToElement(softSkillsContainer);
-}
-
-function renderCertificatesAndCourses(data) {
-    if (!data.certificates.sectionVisible) { return; }
-
-    let certificationsAndCoursesContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let div = createElement('div');
-    let description = createElement('p');
-    let sectionTitle = createElement('h2');
-    let certificateUl = createElement('ul');
-
-    description.innerHTML = data.certificates.description;
-    sectionTitle.innerHTML = data.certificates.title;
-
-
-    data.certificates.items.forEach(certificate => {
-        let url = createUrlElement(certificate.name, certificate.url, '_blank');
-        let certificateLi = createElement('li');
-        certificateLi.appendChild(url);
-        certificateUl.appendChild(certificateLi);
-    });
-
-    certificationsAndCoursesContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(certificateUl);
-    divGroupContainer.appendChild(div);
-    certificationsAndCoursesContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(certificationsAndCoursesContainer);
-
-    appendHrToElement(certificationsAndCoursesContainer);
-}
-
-function renderURLs(data) {
-    if (!data.interestingUrls.sectionVisible) { return; }
-
-    let interestingUrlsContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let interestingUrlUl = createElement('ul');
-
-    sectionTitle.innerHTML = data.interestingUrls.title;
-    description.innerHTML = data.interestingUrls.description;
-
-    data.interestingUrls.items.forEach(interestingUrl => {
-        let url = createUrlElement(interestingUrl.name, interestingUrl.url, '_blank');
-        let interestingUrlLi = createElement('li');
-
-        interestingUrlLi.appendChild(url);
-        interestingUrlUl.appendChild(interestingUrlLi);
-    });
-
-    interestingUrlsContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(interestingUrlUl);
-    divGroupContainer.appendChild(div);
-    interestingUrlsContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(interestingUrlsContainer);
-
-    appendHrToElement(interestingUrlsContainer);
-}
-
 function renderSection(section) {
     if (!section.sectionVisible) { return; }
 
@@ -482,37 +303,6 @@ function renderSection(section) {
     });
 
     div.appendChild(ul);
-}
-
-function renderContact(data) {
-    if (!data.contact.sectionVisible) { return; }
-
-    let personalContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let personalUl = createElement('ul');
-
-    sectionTitle.innerHTML = data.contact.title;
-    description.innerHTML = data.contact.description;
-
-    data.contact.items.forEach(contact => {
-        let url = createUrlElement(contact.name, contact.url, '_blank');
-        let contactLi = createElement('li');
-
-        contactLi.appendChild(url);
-        personalUl.appendChild(contactLi);
-    });
-
-    personalContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(personalUl);
-    divGroupContainer.appendChild(div);
-    personalContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(personalContainer);
-
-    appendHrToElement(personalContainer);
 }
 
 function fetchResumeData() {
