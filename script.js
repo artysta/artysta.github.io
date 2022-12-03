@@ -298,7 +298,7 @@ function renderSection(section) {
 
     section.items.forEach(item => {
         let li = createElement('li');
-        li.innerHTML = item.url != 0 ? `<a href="${item.url}" target="_blank">${item.value}</a>` : item.value;
+        li.innerHTML = item.url !== '' ? `<a href="${item.url}" target="_blank">${item.value}</a>` : item.value;
         ul.appendChild(li);
     });
 
