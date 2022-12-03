@@ -154,23 +154,20 @@ function renderPersonal(data) {
     let sectionTitle = createElement('h2');
     let div = createElement('div');
     let description = createElement('p');
-    let personalUl = createElement('ul');
-    let nameLi = createElement('li');
-    let birthYearLi = createElement('li');
-    let nationalityLi = createElement('li');
+    let infoUl = createElement('ul');
+
+    data.personal.items.forEach(info => {
+        let infoLi = createElement('li');
+        infoLi.innerHTML = info.value;
+        infoUl.appendChild(infoLi);
+    });
 
     sectionTitle.innerHTML = data.personal.title;
     description.innerHTML = data.personal.description;
-    nameLi.innerHTML = data.personal.name;
-    birthYearLi.innerHTML = data.personal.birthYear;
-    nationalityLi.innerHTML = data.personal.nationality;
 
     personalContainer.appendChild(sectionTitle);
     div.appendChild(description);
-    div.appendChild(personalUl);
-    personalUl.appendChild(nameLi);
-    personalUl.appendChild(birthYearLi);
-    personalUl.appendChild(nationalityLi);
+    div.appendChild(infoUl);
     divGroupContainer.appendChild(div);
     personalContainer.appendChild(divGroupContainer);
     wrapper.appendChild(personalContainer);
