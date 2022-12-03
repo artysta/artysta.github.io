@@ -21,6 +21,7 @@ fetchResumeData().then(data => {
     renderEducation(data);
     renderLanguages(data);
     renderProgrammingLanguages(data);
+    renderSoftSkills(data);
     renderCertificatesAndCourses(data);
     renderURLs(data);
     renderContact(data);
@@ -360,6 +361,35 @@ function renderProgrammingLanguages(data) {
     wrapper.appendChild(languagesContainer);
 
     appendHrToElement(languagesContainer);
+}
+
+function renderSoftSkills(data) {
+    if (!data.softSkills.sectionVisible) { return; }
+
+    let softSkillsContainer = createElement('div');
+    let divGroupContainer = createElement('div', ['group-container']);
+    let sectionTitle = createElement('h2');
+    let div = createElement('div');
+    let description = createElement('p');
+    let softSkillUl = createElement('ul');
+
+    sectionTitle.innerHTML = data.softSkills.title;
+    description.innerHTML = data.softSkills.description;
+
+    data.softSkills.items.forEach(softSkill => {
+        let softSkillLi = createElement('li');
+        softSkillLi.innerHTML = softSkill.value;
+        softSkillUl.appendChild(softSkillLi);
+    });
+
+    softSkillsContainer.appendChild(sectionTitle);
+    div.appendChild(description);
+    div.appendChild(softSkillUl);
+    divGroupContainer.appendChild(div);
+    softSkillsContainer.appendChild(divGroupContainer);
+    wrapper.appendChild(softSkillsContainer);
+
+    appendHrToElement(softSkillsContainer);
 }
 
 function renderCertificatesAndCourses(data) {
