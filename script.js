@@ -15,16 +15,16 @@ fetchResumeData().then(data => {
 
     makeLoaderVisible(true);
     renderSwitchThemeButton();
-    renderAbout(data);
-    renderPersonal(data);
+    renderSection(data.about);
+    renderSection(data.personal);
     renderWorkplaces(data);
     renderEducation(data);
-    renderLanguages(data);
+    renderSection(data.languages);
     renderProgrammingLanguages(data);
-    renderSoftSkills(data);
-    renderCertificatesAndCourses(data);
-    renderURLs(data);
-    renderContact(data);
+    renderSection(data.softSkills);
+    renderSection(data.certificatesAndCourses);
+    renderSection(data.interestingUrls);
+    renderSection(data.contact);
     renderFooter();
 }).catch(error => {
     renderMessage('Could not load the page! :(');
@@ -449,6 +449,39 @@ function renderURLs(data) {
     wrapper.appendChild(interestingUrlsContainer);
 
     appendHrToElement(interestingUrlsContainer);
+}
+
+function renderSection(section) {
+    if (!section.sectionVisible) { return; }
+
+    let sectionContainer = createElement('div');
+    let groupContainer = createElement('div', ['group-container']);
+    let title = createElement('h2');
+    let div = createElement('div');
+    let description = createElement('p');
+
+    title.innerHTML = section.title;
+    description.innerHTML = section.description;
+
+    sectionContainer.appendChild(title);
+    div.appendChild(description);
+    groupContainer.appendChild(div);
+    sectionContainer.appendChild(groupContainer);
+    wrapper.appendChild(sectionContainer);
+
+    appendHrToElement(sectionContainer);
+
+    if (!section.hasOwnProperty('items')) { return; }
+
+    let ul = createElement('ul');
+
+    section.items.forEach(item => {
+        let li = createElement('li');
+        li.innerHTML = item.url != 0 ? `<a href="${item.url}" target="_blank">${item.value}</a>` : item.value;
+        ul.appendChild(li);
+    });
+
+    div.appendChild(ul);
 }
 
 function renderContact(data) {
