@@ -17,8 +17,8 @@ fetchResumeData().then(data => {
     renderSwitchThemeButton();
     renderSection(data.about);
     renderSection(data.personal);
-    renderWorkplaces(data);
-    renderEducation(data);
+    renderExperienceSection(data.workplaces);
+    renderExperienceSection(data.schools);
     renderSection(data.languages);
     renderProgrammingLanguages(data);
     renderSection(data.softSkills);
@@ -166,6 +166,65 @@ function renderWorkplaces(data) {
     wrapper.appendChild(workplacesContainer);
 
     appendHrToElement(workplacesContainer);
+}
+
+function renderExperienceSection(section) {
+    if (!section.sectionVisible) { return; }
+
+    let sectionContainer = createElement('div');
+    let title = createElement('h2');
+
+    title.innerHTML = section.title;
+
+    sectionContainer.appendChild(title);
+
+    section.items.forEach(section => {
+        let groupContainer = createElement('div', ['group-container']);
+        let logoContainer = createElement('div', ['group-logo-container']);
+        let positionsContainer = createElement('div');
+        let logo = createElement('img');
+        let logoUrlParts = section.logoUrl.split('.');
+        
+        logo.src = section.logoUrl;
+        logo.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
+
+        section.positions.forEach(position => {
+            let positionUl = createElement('ul');
+            let positionLi = createElement('li');
+
+            positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
+            positionUl.appendChild(positionLi);
+
+            if (!position.isActive) {
+                positionUl.innerHTML = `<s>${positionUl.innerHTML}</s>`;
+            }
+
+            position.details.forEach(detail => {
+                let detailUl = createElement('ul');
+                let detailLi = createElement('li');
+
+                detailLi.innerHTML = detail.value;
+
+                if (!position.isActive) {
+                    detailLi.innerHTML = `<s>${detailLi.innerHTML}</s>`;
+                }
+
+                detailUl.appendChild(detailLi);
+                positionUl.appendChild(detailUl);
+            });
+
+            positionsContainer.appendChild(positionUl);
+        });
+
+        logoContainer.appendChild(logo);
+        groupContainer.appendChild(logoContainer);
+        groupContainer.appendChild(positionsContainer);
+        sectionContainer.appendChild(groupContainer);
+    });
+
+    wrapper.appendChild(sectionContainer);
+
+    appendHrToElement(sectionContainer);
 }
 
 function renderEducation(data) {
