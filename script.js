@@ -117,57 +117,6 @@ function renderFooter() {
         .finally(() => wrapper.appendChild(footerContainer));
 }
 
-function renderWorkplaces(data) {
-    if (!data.workplaces.sectionVisible) { return; }
-
-    let workplacesContainer = createElement('div');
-    let sectionTitle = createElement('h2');
-
-    sectionTitle.innerHTML = data.workplaces.title;
-
-    workplacesContainer.appendChild(sectionTitle);
-
-    data.workplaces.items.forEach(workplace => {
-        let divGroupContainer = createElement('div', ['group-container']);
-        let divLogoContainer = createElement('div', ['group-logo-container']);
-        let img = createElement('img');
-        let divPositionsContainer = createElement('div');
-        let logoUrlParts = workplace.logoUrl.split('.');
-
-        img.src = workplace.logoUrl;
-        img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
-
-        workplace.positions.forEach(position => {
-            let positionUl = createElement('ul');
-            let positionLi = createElement('li');
-
-            positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
-            positionUl.appendChild(positionLi);
-
-            position.duties.forEach(duty => {
-                let dutyUl = createElement('ul');
-                let dutyLi = createElement('li');
-
-                dutyLi.innerHTML = duty.value;
-
-                dutyUl.appendChild(dutyLi);
-                positionUl.appendChild(dutyUl);
-            });
-
-            divPositionsContainer.appendChild(positionUl);
-        });
-
-        divLogoContainer.appendChild(img);
-        divGroupContainer.appendChild(divLogoContainer);
-        divGroupContainer.appendChild(divPositionsContainer);
-        workplacesContainer.appendChild(divGroupContainer);
-    });
-
-    wrapper.appendChild(workplacesContainer);
-
-    appendHrToElement(workplacesContainer);
-}
-
 function renderExperienceSection(section) {
     if (!section.sectionVisible) { return; }
 
@@ -225,68 +174,6 @@ function renderExperienceSection(section) {
     wrapper.appendChild(sectionContainer);
 
     appendHrToElement(sectionContainer);
-}
-
-function renderEducation(data) {
-    if (!data.schools.sectionVisible) { return; }
-
-    let educationContainer = createElement('div');
-    let sectionTitle = createElement('h2');
-
-    sectionTitle.innerHTML = data.schools.title;
-
-    educationContainer.appendChild(sectionTitle);
-
-    data.schools.items.forEach(school => {
-        let divGroupContainer = createElement('div', ['group-container']);
-        let divLogoContainer = createElement('div', ['group-logo-container']);
-        let img = createElement('img');
-        let divPositionsContainer = createElement('div');
-        let logoUrlParts = school.logoUrl.split('.');
-
-        img.src = school.logoUrl;
-        img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
-
-        school.fieldOfStudies.forEach(fieldOfStudy => {
-            let fieldOfStudyUl = createElement('ul');
-            let fieldOfStudyLi = createElement('li');
-
-            fieldOfStudyLi.innerHTML = `<strong>${fieldOfStudy.dateFrom} - ${fieldOfStudy.dateThru}</strong> - ${school.name}`;
-
-            fieldOfStudyUl.appendChild(fieldOfStudyLi);
-
-            if (!school.isActive) {
-                let tmp = fieldOfStudyUl.innerHTML;
-                fieldOfStudyUl.innerHTML = `<s>${tmp}</s>`;
-            }
-
-            fieldOfStudy.details.forEach(detail => {
-                let detailUl = createElement('ul');
-                let detailLi = createElement('li');
-
-                detailLi.innerHTML = detail.value;
-
-                if (!fieldOfStudy.isActive) {
-                    let tmp = detailLi.innerHTML;
-                    detailLi.innerHTML = `<s>${tmp}</s>`;
-                }
-
-                detailUl.appendChild(detailLi);
-                fieldOfStudyUl.appendChild(detailUl);
-            });
-
-            divPositionsContainer.appendChild(fieldOfStudyUl);
-        });
-
-        divLogoContainer.appendChild(img);
-        divGroupContainer.appendChild(divLogoContainer);
-        divGroupContainer.appendChild(divPositionsContainer);
-        educationContainer.appendChild(divGroupContainer);
-    });
-
-    wrapper.appendChild(educationContainer);
-
-    appendHrToElement(educationContainer);
 }
 
 function renderProgrammingLanguages(data) {
