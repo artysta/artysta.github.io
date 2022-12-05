@@ -20,7 +20,7 @@ fetchResumeData().then(data => {
     renderExperienceSection(data.workplaces);
     renderExperienceSection(data.schools);
     renderSection(data.languages);
-    renderIconsSection(data.technologies)
+    renderIconsSection(data.technologies);
     renderSection(data.softSkills);
     renderSection(data.certificatesAndCourses);
     renderSection(data.interestingUrls);
