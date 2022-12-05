@@ -62,7 +62,6 @@ function makeLoaderVisible(visible) {
 
 function switchTheme() {
     isDarkThemeOn = !isDarkThemeOn;
-
     let button = document.getElementsByTagName('button')[0];
     let body = document.body;
     let groupContainers = document.getElementsByClassName('group-container');
@@ -72,16 +71,26 @@ function switchTheme() {
 
     button.classList.toggle('button-light-mode');
     button.innerHTML = isDarkThemeOn ? LIGHT_THEME : DARK_THEME;
+
     body.classList.toggle('body-light-mode');
 
-    Array.from(groupContainers).forEach(container => container.classList.toggle('group-container-light-mode'));
-    Array.from(urls).forEach(url => url.classList.toggle('group-container-light-mode'));
-    Array.from(hrs).forEach(hr => hr.classList.toggle('group-container-light-mode'));
-    Array.from(images).forEach(image => {
+    for (let groupContainer of groupContainers) {
+        groupContainer.classList.toggle('group-container-light-mode');
+    }
+
+    for (let url of urls) {
+        url.classList.toggle('a-light-mode');
+    }
+
+    for (let hr of hrs) {
+        hr.classList.toggle('hr-light-mode');
+    }
+
+    for (let image of images) {
         let newSrc = image.src.split('-')[0];
         let extension = image.dataset.extension;
         image.src = isDarkThemeOn ? `${newSrc}-light.${extension}` : `${newSrc}-dark.${extension}`;
-    });
+    }
 }
 
 function renderMessage(message) {
