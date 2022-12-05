@@ -20,7 +20,7 @@ fetchResumeData().then(data => {
     renderExperienceSection(data.workplaces);
     renderExperienceSection(data.schools);
     renderSection(data.languages);
-    renderProgrammingLanguages(data);
+    renderIconsSection(data.technologies)
     renderSection(data.softSkills);
     renderSection(data.certificatesAndCourses);
     renderSection(data.interestingUrls);
@@ -176,46 +176,44 @@ function renderExperienceSection(section) {
     appendHrToElement(sectionContainer);
 }
 
-function renderProgrammingLanguages(data) {
-    if (!data.technologies.sectionVisible) { return; }
+function renderIconsSection(section) {
+    if (!section.sectionVisible) { return; }
 
-    let languagesContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
+    let sectionContainer = createElement('div');
+    let groupContainer = createElement('div', ['group-container']);
+    let title = createElement('h2');
     let div = createElement('div');
     let description = createElement('p');
-    let divLanguagesWrapper = createElement('div', ['languages-wrapper']);
+    let languagesWrapper = createElement('div', ['languages-wrapper']);
 
-    sectionTitle.innerHTML = data.technologies.title;
-    description.innerHTML = data.technologies.description;
+    title.innerHTML = section.title;
+    description.innerHTML = section.description;
 
-    data.technologies.items.forEach(technology => {
-        let divIcon = createElement('div', ['div-image']);
-        let iIcon = createElement('i');
+    section.items.forEach(technology => {
+        let iconContainer = createElement('div', ['div-image']);
+        let icon = createElement('i');
+        let iconTitle = createElement('p');
+        
+        iconTitle.innerHTML = technology.name;
+        icon.classList.add(...technology.class.split(' '));
 
-        // Split if there is more than one class.
-        if (technology.class.includes(' ')) {
-            iIcon.classList.add(...technology.class.split(' '));
-        } else {
-            iIcon.classList.add(technology.class);
-            iIcon.style.fontSize = technology.size;
+        if (icon.classList.length <= 1) {
+            icon.style.fontSize = technology.size;
         }
 
-        divIcon.appendChild(iIcon);
-        let pIcon = createElement('p');
-        pIcon.innerHTML = technology.name;
-        divIcon.appendChild(pIcon);
-        divLanguagesWrapper.appendChild(divIcon);
+        iconContainer.appendChild(icon);
+        iconContainer.appendChild(iconTitle);
+        languagesWrapper.appendChild(iconContainer);
     });
 
-    languagesContainer.appendChild(sectionTitle);
+    sectionContainer.appendChild(title);
     div.appendChild(description);
-    div.appendChild(divLanguagesWrapper);
-    divGroupContainer.appendChild(div);
-    languagesContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(languagesContainer);
+    div.appendChild(languagesWrapper);
+    groupContainer.appendChild(div);
+    sectionContainer.appendChild(groupContainer);
+    wrapper.appendChild(sectionContainer);
 
-    appendHrToElement(languagesContainer);
+    appendHrToElement(sectionContainer);
 }
 
 function renderSection(section) {
