@@ -17,8 +17,8 @@ fetchResumeData().then(data => {
     renderSwitchThemeButton();
     renderSection(data.about);
     renderSection(data.personal);
-    renderExperienceSection(data.workplaces);
-    renderExperienceSection(data.schools);
+    renderSection(data.workplaces);
+    renderSection(data.schools);
     renderSection(data.languages);
     renderIconsSection(data.technologies);
     renderSection(data.softSkills);
@@ -243,19 +243,66 @@ function renderSection(section) {
     sectionContainer.appendChild(groupContainer);
     wrapper.appendChild(sectionContainer);
 
+    if (section.hasOwnProperty('items')) {
+        let ul = createElement('ul');
+
+        section.items.forEach(item => {
+            let li = createElement('li');
+            li.innerHTML = item.url !== '' ? `<a href="${item.url}" target="_blank">${item.value}</a>` : item.value;
+            ul.appendChild(li);
+        });
+
+        div.appendChild(ul);
+    }
+
+    // TODO: rename 'items2' key
+    if (section.hasOwnProperty('items2')) {
+        section.items2.forEach(section => {
+            let positionGroupContainer = createElement('div', ['group-container']);
+            let logoContainer = createElement('div', ['group-logo-container']);
+            let positionsContainer = createElement('div');
+            let logo = createElement('img');
+            let logoUrlParts = section.logoUrl.split('.');
+            
+            logo.src = section.logoUrl;
+            logo.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
+
+            section.positions.forEach(position => {
+                let positionUl = createElement('ul');
+                let positionLi = createElement('li');
+
+                positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
+                positionUl.appendChild(positionLi);
+
+                if (!position.isActive) {
+                    positionUl.innerHTML = `<s>${positionUl.innerHTML}</s>`;
+                }
+
+                position.details.forEach(detail => {
+                    let detailUl = createElement('ul');
+                    let detailLi = createElement('li');
+
+                    detailLi.innerHTML = detail.value;
+
+                    if (!position.isActive) {
+                        detailLi.innerHTML = `<s>${detailLi.innerHTML}</s>`;
+                    }
+
+                    detailUl.appendChild(detailLi);
+                    positionUl.appendChild(detailUl);
+                });
+
+                positionsContainer.appendChild(positionUl);
+            });
+
+            logoContainer.appendChild(logo);
+            positionGroupContainer.appendChild(logoContainer);
+            positionGroupContainer.appendChild(positionsContainer);
+            sectionContainer.appendChild(positionGroupContainer);
+        });
+    }
+
     appendHrToElement(sectionContainer);
-
-    if (!section.hasOwnProperty('items')) { return; }
-
-    let ul = createElement('ul');
-
-    section.items.forEach(item => {
-        let li = createElement('li');
-        li.innerHTML = item.url !== '' ? `<a href="${item.url}" target="_blank">${item.value}</a>` : item.value;
-        ul.appendChild(li);
-    });
-
-    div.appendChild(ul);
 }
 
 function fetchResumeData() {
