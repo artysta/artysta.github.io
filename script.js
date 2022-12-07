@@ -15,16 +15,15 @@ fetchResumeData().then(data => {
 
     makeLoaderVisible(true);
     renderSwitchThemeButton();
-    renderSection(data.about);
-    renderSection(data.personal);
-    renderSection(data.workplaces);
-    renderSection(data.schools);
-    renderSection(data.languages);
-    renderIconsSection(data.technologies);
-    renderSection(data.softSkills);
-    renderSection(data.certificatesAndCourses);
-    renderSection(data.interestingUrls);
-    renderSection(data.contact);
+
+    for (key in data) {
+        if (key === 'siteSettings') {
+            continue;
+        }
+
+        renderSection(data[key]);
+    }
+
     renderFooter();
 }).catch(error => {
     renderMessage('Could not load the page! :(');
@@ -197,18 +196,18 @@ function renderSection(section) {
     }
 
     // TODO: rename 'items2' key
-    if (section.hasOwnProperty('items2')) {
-        section.items2.forEach(section => {
+    if (section.hasOwnProperty('itemsWithLogo')) {
+        section.itemsWithLogo.forEach(item => {
             let positionGroupContainer = createElement('div', ['group-container']);
             let logoContainer = createElement('div', ['group-logo-container']);
             let positionsContainer = createElement('div');
             let logo = createElement('img');
-            let logoUrlParts = section.logoUrl.split('.');
+            let logoUrlParts = item.logoUrl.split('.');
             
-            logo.src = section.logoUrl;
+            logo.src = item.logoUrl;
             logo.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
 
-            section.positions.forEach(position => {
+            item.positions.forEach(position => {
                 let positionUl = createElement('ul');
                 let positionLi = createElement('li');
 
@@ -243,7 +242,31 @@ function renderSection(section) {
         });
     }
 
-    appendHrToElement(sectionContainer);
+    if (section.hasOwnProperty('icons')) {
+        let languagesWrapper = createElement('div', ['languages-wrapper']);
+
+        section.icons.forEach(icon => {
+            let iconContainer = createElement('div', ['div-image']);
+            let iconI = createElement('i');
+            let iconTitle = createElement('p');
+            
+            iconTitle.innerHTML = icon.name;
+            iconI.classList.add(...icon.class.split(' '));
+    
+            if (iconI.classList.length <= 1) {
+                iconI.style.fontSize = icon.size;
+            }
+    
+            iconContainer.appendChild(iconI);
+            iconContainer.appendChild(iconTitle);
+            languagesWrapper.appendChild(iconContainer);
+        });
+
+        div.appendChild(languagesWrapper);
+    }
+
+    let hr = createElement('hr');
+    sectionContainer.appendChild(hr);
 }
 
 function fetchResumeData() {
