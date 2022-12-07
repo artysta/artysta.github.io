@@ -41,11 +41,6 @@ function createElement(element, classList) {
     return newElement;
 }
 
-function appendHrToElement(element) {
-    let hr = createElement('hr');
-    element.appendChild(hr);
-}
-
 function shouldPageBeVisible(data) {
     return data.siteSettings.pageVisible;
 }
@@ -123,46 +118,6 @@ function renderFooter() {
         })
         .catch(error => footerContainer.innerHTML = `Last edited at N/A`)
         .finally(() => wrapper.appendChild(footerContainer));
-}
-
-function renderIconsSection(section) {
-    if (!section.sectionVisible) { return; }
-
-    let sectionContainer = createElement('div');
-    let groupContainer = createElement('div', ['group-container']);
-    let title = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let languagesWrapper = createElement('div', ['languages-wrapper']);
-
-    title.innerHTML = section.title;
-    description.innerHTML = section.description;
-
-    section.items.forEach(technology => {
-        let iconContainer = createElement('div', ['div-image']);
-        let icon = createElement('i');
-        let iconTitle = createElement('p');
-        
-        iconTitle.innerHTML = technology.name;
-        icon.classList.add(...technology.class.split(' '));
-
-        if (icon.classList.length <= 1) {
-            icon.style.fontSize = technology.size;
-        }
-
-        iconContainer.appendChild(icon);
-        iconContainer.appendChild(iconTitle);
-        languagesWrapper.appendChild(iconContainer);
-    });
-
-    sectionContainer.appendChild(title);
-    div.appendChild(description);
-    div.appendChild(languagesWrapper);
-    groupContainer.appendChild(div);
-    sectionContainer.appendChild(groupContainer);
-    wrapper.appendChild(sectionContainer);
-
-    appendHrToElement(sectionContainer);
 }
 
 function renderSection(section) {
