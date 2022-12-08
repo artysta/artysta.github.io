@@ -28,7 +28,10 @@ fetchResumeData().then(data => {
 }).catch(error => {
     renderMessage('Could not load the page! :(');
 }).finally(() => {
-    setTimeout(makePageVisible, 200);
+    setTimeout(() => {
+        makePageVisible();
+        makeLoaderVisible(false);
+    }, 200);
 });
 
 function createElement(element, classList) {
@@ -47,7 +50,6 @@ function shouldPageBeVisible(data) {
 
 function makePageVisible() {
     content.style.opacity = 1;
-    makeLoaderVisible(false);
 }
 
 function makeLoaderVisible(visible) {
@@ -150,7 +152,6 @@ function renderSection(section) {
         div.appendChild(ul);
     }
 
-    // TODO: rename 'items2' key
     if (section.hasOwnProperty('itemsWithLogo')) {
         section.itemsWithLogo.forEach(item => {
             let positionGroupContainer = createElement('div', ['group-container']);
@@ -198,7 +199,7 @@ function renderSection(section) {
     }
 
     if (section.hasOwnProperty('icons')) {
-        let languagesWrapper = createElement('div', ['languages-wrapper']);
+        let iconsWrapper = createElement('div', ['icons-wrapper']);
 
         section.icons.forEach(icon => {
             let iconContainer = createElement('div', ['div-image']);
@@ -214,10 +215,10 @@ function renderSection(section) {
     
             iconContainer.appendChild(iconI);
             iconContainer.appendChild(iconTitle);
-            languagesWrapper.appendChild(iconContainer);
+            iconsWrapper.appendChild(iconContainer);
         });
 
-        div.appendChild(languagesWrapper);
+        div.appendChild(iconsWrapper);
     }
 
     let hr = createElement('hr');
