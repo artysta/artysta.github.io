@@ -123,7 +123,7 @@ function renderFooter() {
 }
 
 function renderSection(section) {
-    if (!section.sectionVisible) { return; }
+    if (!section.visible) { return; }
 
     let sectionContainer = createElement('div');
     let groupContainer = createElement('div', ['group-container']);
