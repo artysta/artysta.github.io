@@ -1,8 +1,10 @@
 // TODO: Refactor for sure.
 
 let isDarkThemeOn = true;
-const LIGHT_THEME = 'LIGHT THEME';
-const DARK_THEME = 'DARK THEME';
+const SWITCH_THEME = 'SWITCH THEME';
+const RESUME_URL = 'https://adriankurek.pl/github/resume.json';
+const SETTINGS_URL = 'https://adriankurek.pl/github/settings.json';
+const GITHUB_COMMITS_URL = 'https://api.github.com/repos/artysta/artysta.github.io/commits';
 const loader = document.getElementById('loader');
 const wrapper = document.getElementById('main-wrapper');
 const content = document.getElementsByClassName('content')[0];
@@ -66,8 +68,6 @@ function switchTheme() {
     let images = document.getElementsByTagName('img');
 
     button.classList.toggle('button-light-mode');
-    button.innerHTML = isDarkThemeOn ? LIGHT_THEME : DARK_THEME;
-
     body.classList.toggle('body-light-mode');
 
     for (let groupContainer of groupContainers) {
@@ -104,14 +104,14 @@ function renderMessage(message) {
 
 function renderSwitchThemeButton() {
     let button = createElement('button');
-    button.innerText = LIGHT_THEME;
+    button.innerText = SWITCH_THEME;
     button.onclick = switchTheme;
     wrapper.prepend(button);
 }
 
 function renderFooter() {
     let footerContainer = createElement('div', ['footer']);
-    fetch('https://api.github.com/repos/artysta/artysta.github.io/commits')
+    fetch(GITHUB_COMMITS_URL)
         .then(response => response.json())
         .then(commits => {
             let latestCommit = commits[0];
@@ -226,5 +226,5 @@ function renderSection(section) {
 }
 
 function fetchResumeData() {
-    return fetch('https://adriankurek.pl/resume.json').then(response => response.json());
+    return fetch(RESUME_URL).then(response => response.json());
 }
