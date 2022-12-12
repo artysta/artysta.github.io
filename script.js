@@ -9,24 +9,24 @@ const loader = document.getElementById('loader');
 const wrapper = document.getElementById('main-wrapper');
 const content = document.getElementsByClassName('content')[0];
 
-fetchResumeData().then(data => {
-    if (!shouldPageBeVisible(data)) {
+fetchSettingsData().then(data => {
+    makeLoaderVisible(true);
+
+    if (!data.pageVisible) {
         renderMessage('Page is not available at the moment! :(');
+        makeLoaderVisible(false);
         return;
     }
-
-    makeLoaderVisible(true);
-    renderSwitchThemeButton();
-
-    for (key in data) {
-        if (key === 'siteSettings') {
-            continue;
+    
+    fetchResumeData().then(data => {
+        renderSwitchThemeButton();
+    
+        for (key in data) {
+            renderSection(data[key]);
         }
-
-        renderSection(data[key]);
-    }
-
-    renderFooter();
+    
+        renderFooter();
+    });
 }).catch(error => {
     renderMessage('Could not load the page! :(');
 }).finally(() => {
@@ -223,6 +223,10 @@ function renderSection(section) {
 
     let hr = createElement('hr');
     sectionContainer.appendChild(hr);
+}
+
+function fetchSettingsData() {
+    return fetch(SETTINGS_URL).then(response => response.json());
 }
 
 function fetchResumeData() {
