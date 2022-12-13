@@ -72,14 +72,14 @@ hr {
     text-align: center;
 }
 
-.languages-wrapper {
+.icons-wrapper {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     transition: 0.4s;
 }
 
-.languages-wrapper:hover {
+.icons-wrapper:hover {
     transition: 0.4s;
 }
 

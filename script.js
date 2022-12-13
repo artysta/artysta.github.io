@@ -1,35 +1,39 @@
 // TODO: Refactor for sure.
 
 let isDarkThemeOn = true;
-const LIGHT_THEME = 'LIGHT THEME';
-const DARK_THEME = 'DARK THEME';
+const SWITCH_THEME = 'SWITCH THEME';
+const RESUME_URL = 'https://adriankurek.pl/github/resume.json';
+const SETTINGS_URL = 'https://adriankurek.pl/github/settings.json';
+const GITHUB_COMMITS_URL = 'https://api.github.com/repos/artysta/artysta.github.io/commits';
 const loader = document.getElementById('loader');
 const wrapper = document.getElementById('main-wrapper');
 const content = document.getElementsByClassName('content')[0];
 
-fetchResumeData().then(data => {
-    if (!shouldPageBeVisible(data)) {
+fetchSettingsData().then(data => {
+    makeLoaderVisible(true);
+
+    if (!data.pageVisible) {
         renderMessage('Page is not available at the moment! :(');
+        makeLoaderVisible(false);
         return;
     }
-
-    makeLoaderVisible(true);
-    renderSwitchThemeButton();
-    renderAbout(data);
-    renderPersonal(data);
-    renderWorkplaces(data);
-    renderEducation(data);
-    renderLanguages(data);
-    renderProgrammingLanguages(data);
-    renderSoftSkills(data);
-    renderCertificatesAndCourses(data);
-    renderURLs(data);
-    renderContact(data);
-    renderFooter();
+    
+    fetchResumeData().then(data => {
+        renderSwitchThemeButton();
+    
+        for (key in data) {
+            renderSection(data[key]);
+        }
+    
+        renderFooter();
+    });
 }).catch(error => {
     renderMessage('Could not load the page! :(');
 }).finally(() => {
-    setTimeout(makePageVisible, 200);
+    setTimeout(() => {
+        makePageVisible();
+        makeLoaderVisible(false);
+    }, 200);
 });
 
 function createElement(element, classList) {
@@ -42,28 +46,12 @@ function createElement(element, classList) {
     return newElement;
 }
 
-function createUrlElement(innerHtml, href, target) {
-    let urlElement = createElement('a');
-
-    urlElement.innerHTML = innerHtml;
-    urlElement.href = href;
-    urlElement.target = target;
-
-    return urlElement;
-}
-
-function appendHrToElement(element) {
-    let hr = createElement('hr');
-    element.appendChild(hr);
-}
-
 function shouldPageBeVisible(data) {
     return data.siteSettings.pageVisible;
 }
 
 function makePageVisible() {
     content.style.opacity = 1;
-    makeLoaderVisible(false);
 }
 
 function makeLoaderVisible(visible) {
@@ -72,7 +60,6 @@ function makeLoaderVisible(visible) {
 
 function switchTheme() {
     isDarkThemeOn = !isDarkThemeOn;
-
     let button = document.getElementsByTagName('button')[0];
     let body = document.body;
     let groupContainers = document.getElementsByClassName('group-container');
@@ -81,17 +68,25 @@ function switchTheme() {
     let images = document.getElementsByTagName('img');
 
     button.classList.toggle('button-light-mode');
-    button.innerHTML = isDarkThemeOn ? LIGHT_THEME : DARK_THEME;
     body.classList.toggle('body-light-mode');
 
-    Array.from(groupContainers).forEach(container => container.classList.toggle('group-container-light-mode'));
-    Array.from(urls).forEach(url => url.classList.toggle('group-container-light-mode'));
-    Array.from(hrs).forEach(hr => hr.classList.toggle('group-container-light-mode'));
-    Array.from(images).forEach(image => {
+    for (let groupContainer of groupContainers) {
+        groupContainer.classList.toggle('group-container-light-mode');
+    }
+
+    for (let url of urls) {
+        url.classList.toggle('a-light-mode');
+    }
+
+    for (let hr of hrs) {
+        hr.classList.toggle('hr-light-mode');
+    }
+
+    for (let image of images) {
         let newSrc = image.src.split('-')[0];
         let extension = image.dataset.extension;
         image.src = isDarkThemeOn ? `${newSrc}-light.${extension}` : `${newSrc}-dark.${extension}`;
-    });
+    }
 }
 
 function renderMessage(message) {
@@ -109,14 +104,14 @@ function renderMessage(message) {
 
 function renderSwitchThemeButton() {
     let button = createElement('button');
-    button.innerText = LIGHT_THEME;
+    button.innerText = SWITCH_THEME;
     button.onclick = switchTheme;
     wrapper.prepend(button);
 }
 
 function renderFooter() {
     let footerContainer = createElement('div', ['footer']);
-    fetch('https://api.github.com/repos/artysta/artysta.github.io/commits')
+    fetch(GITHUB_COMMITS_URL)
         .then(response => response.json())
         .then(commits => {
             let latestCommit = commits[0];
@@ -127,361 +122,113 @@ function renderFooter() {
         .finally(() => wrapper.appendChild(footerContainer));
 }
 
-function renderAbout(data) {
-    if (!data.about.sectionVisible) { return; }
+function renderSection(section) {
+    if (!section.visible) { return; }
 
-    let aboutContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let description = createElement('p');
-
-    sectionTitle.innerHTML = data.about.title;
-    description.innerHTML = data.about.description;
-
-    aboutContainer.appendChild(sectionTitle);
-    divGroupContainer.appendChild(description);
-    aboutContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(aboutContainer);
-
-    appendHrToElement(aboutContainer);
-}
-
-function renderPersonal(data) {
-    if (!data.personal.sectionVisible) { return; }
-
-    let personalContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
+    let sectionContainer = createElement('div');
+    let groupContainer = createElement('div', ['group-container']);
+    let title = createElement('h2');
     let div = createElement('div');
     let description = createElement('p');
-    let infoUl = createElement('ul');
 
-    data.personal.items.forEach(info => {
-        let infoLi = createElement('li');
-        infoLi.innerHTML = info.value;
-        infoUl.appendChild(infoLi);
-    });
+    title.innerHTML = section.title;
+    description.innerHTML = section.description;
 
-    sectionTitle.innerHTML = data.personal.title;
-    description.innerHTML = data.personal.description;
-
-    personalContainer.appendChild(sectionTitle);
+    sectionContainer.appendChild(title);
     div.appendChild(description);
-    div.appendChild(infoUl);
-    divGroupContainer.appendChild(div);
-    personalContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(personalContainer);
+    groupContainer.appendChild(div);
+    sectionContainer.appendChild(groupContainer);
+    wrapper.appendChild(sectionContainer);
 
-    appendHrToElement(personalContainer);
-}
+    if (section.hasOwnProperty('items')) {
+        let ul = createElement('ul');
 
-function renderWorkplaces(data) {
-    if (!data.workplaces.sectionVisible) { return; }
-
-    let workplacesContainer = createElement('div');
-    let sectionTitle = createElement('h2');
-
-    sectionTitle.innerHTML = data.workplaces.title;
-
-    workplacesContainer.appendChild(sectionTitle);
-
-    data.workplaces.items.forEach(workplace => {
-        let divGroupContainer = createElement('div', ['group-container']);
-        let divLogoContainer = createElement('div', ['group-logo-container']);
-        let img = createElement('img');
-        let divPositionsContainer = createElement('div');
-        let logoUrlParts = workplace.logoUrl.split('.');
-
-        img.src = workplace.logoUrl;
-        img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
-
-        workplace.positions.forEach(position => {
-            let positionUl = createElement('ul');
-            let positionLi = createElement('li');
-
-            positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
-            positionUl.appendChild(positionLi);
-
-            position.duties.forEach(duty => {
-                let dutyUl = createElement('ul');
-                let dutyLi = createElement('li');
-
-                dutyLi.innerHTML = duty.value;
-
-                dutyUl.appendChild(dutyLi);
-                positionUl.appendChild(dutyUl);
-            });
-
-            divPositionsContainer.appendChild(positionUl);
+        section.items.forEach(item => {
+            let li = createElement('li');
+            li.innerHTML = item.url !== '' ? `<a href="${item.url}" target="_blank">${item.value}</a>` : item.value;
+            ul.appendChild(li);
         });
 
-        divLogoContainer.appendChild(img);
-        divGroupContainer.appendChild(divLogoContainer);
-        divGroupContainer.appendChild(divPositionsContainer);
-        workplacesContainer.appendChild(divGroupContainer);
-    });
+        div.appendChild(ul);
+    }
 
-    wrapper.appendChild(workplacesContainer);
+    if (section.hasOwnProperty('itemsWithLogo')) {
+        section.itemsWithLogo.forEach(item => {
+            let positionGroupContainer = createElement('div', ['group-container']);
+            let logoContainer = createElement('div', ['group-logo-container']);
+            let positionsContainer = createElement('div');
+            let logo = createElement('img');
+            let logoUrlParts = item.logoUrl.split('.');
+            
+            logo.src = item.logoUrl;
+            logo.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
 
-    appendHrToElement(workplacesContainer);
-}
+            item.positions.forEach(position => {
+                let positionUl = createElement('ul');
+                let positionLi = createElement('li');
 
-function renderEducation(data) {
-    if (!data.schools.sectionVisible) { return; }
+                positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
+                positionUl.appendChild(positionLi);
 
-    let educationContainer = createElement('div');
-    let sectionTitle = createElement('h2');
-
-    sectionTitle.innerHTML = data.schools.title;
-
-    educationContainer.appendChild(sectionTitle);
-
-    data.schools.items.forEach(school => {
-        let divGroupContainer = createElement('div', ['group-container']);
-        let divLogoContainer = createElement('div', ['group-logo-container']);
-        let img = createElement('img');
-        let divPositionsContainer = createElement('div');
-        let logoUrlParts = school.logoUrl.split('.');
-
-        img.src = school.logoUrl;
-        img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
-
-        school.fieldOfStudies.forEach(fieldOfStudy => {
-            let fieldOfStudyUl = createElement('ul');
-            let fieldOfStudyLi = createElement('li');
-
-            fieldOfStudyLi.innerHTML = `<strong>${fieldOfStudy.dateFrom} - ${fieldOfStudy.dateThru}</strong> - ${school.name}`;
-
-            fieldOfStudyUl.appendChild(fieldOfStudyLi);
-
-            if (!school.isActive) {
-                let tmp = fieldOfStudyUl.innerHTML;
-                fieldOfStudyUl.innerHTML = `<s>${tmp}</s>`;
-            }
-
-            fieldOfStudy.details.forEach(detail => {
-                let detailUl = createElement('ul');
-                let detailLi = createElement('li');
-
-                detailLi.innerHTML = detail.value;
-
-                if (!fieldOfStudy.isActive) {
-                    let tmp = detailLi.innerHTML;
-                    detailLi.innerHTML = `<s>${tmp}</s>`;
+                if (!position.isActive) {
+                    positionUl.innerHTML = `<s>${positionUl.innerHTML}</s>`;
                 }
 
-                detailUl.appendChild(detailLi);
-                fieldOfStudyUl.appendChild(detailUl);
+                position.details.forEach(detail => {
+                    let detailUl = createElement('ul');
+                    let detailLi = createElement('li');
+
+                    detailLi.innerHTML = detail.value;
+
+                    if (!position.isActive) {
+                        detailLi.innerHTML = `<s>${detailLi.innerHTML}</s>`;
+                    }
+
+                    detailUl.appendChild(detailLi);
+                    positionUl.appendChild(detailUl);
+                });
+
+                positionsContainer.appendChild(positionUl);
             });
 
-            divPositionsContainer.appendChild(fieldOfStudyUl);
+            logoContainer.appendChild(logo);
+            positionGroupContainer.appendChild(logoContainer);
+            positionGroupContainer.appendChild(positionsContainer);
+            sectionContainer.appendChild(positionGroupContainer);
+        });
+    }
+
+    if (section.hasOwnProperty('icons')) {
+        let iconsWrapper = createElement('div', ['icons-wrapper']);
+
+        section.icons.forEach(icon => {
+            let iconContainer = createElement('div', ['div-image']);
+            let iconI = createElement('i');
+            let iconTitle = createElement('p');
+            
+            iconTitle.innerHTML = icon.name;
+            iconI.classList.add(...icon.class.split(' '));
+    
+            if (iconI.classList.length <= 1) {
+                iconI.style.fontSize = icon.size;
+            }
+    
+            iconContainer.appendChild(iconI);
+            iconContainer.appendChild(iconTitle);
+            iconsWrapper.appendChild(iconContainer);
         });
 
-        divLogoContainer.appendChild(img);
-        divGroupContainer.appendChild(divLogoContainer);
-        divGroupContainer.appendChild(divPositionsContainer);
-        educationContainer.appendChild(divGroupContainer);
-    });
+        div.appendChild(iconsWrapper);
+    }
 
-    wrapper.appendChild(educationContainer);
-
-    appendHrToElement(educationContainer);
+    let hr = createElement('hr');
+    sectionContainer.appendChild(hr);
 }
 
-function renderLanguages(data) {
-    if (!data.languages.sectionVisible) { return; }
-
-    let languagesContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let languageUl = createElement('ul');
-
-    sectionTitle.innerHTML = data.languages.title;
-    description.innerHTML = data.languages.description;
-
-    data.languages.items.forEach(language => {
-        let languageLi = createElement('li');
-        languageLi.innerHTML = `${language.name} (${language.level})`
-        languageUl.appendChild(languageLi);
-    });
-
-
-    languagesContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(languageUl);
-    divGroupContainer.appendChild(div);
-    languagesContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(languagesContainer);
-
-    appendHrToElement(languagesContainer);
-}
-
-function renderProgrammingLanguages(data) {
-    if (!data.technologies.sectionVisible) { return; }
-
-    let languagesContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let divLanguagesWrapper = createElement('div', ['languages-wrapper']);
-
-    sectionTitle.innerHTML = data.technologies.title;
-    description.innerHTML = data.technologies.description;
-
-    data.technologies.items.forEach(technology => {
-        let divIcon = createElement('div', ['div-image']);
-        let iIcon = createElement('i');
-
-        // Split if there is more than one class.
-        if (technology.class.includes(' ')) {
-            iIcon.classList.add(...technology.class.split(' '));
-        } else {
-            iIcon.classList.add(technology.class);
-            iIcon.style.fontSize = technology.size;
-        }
-
-        divIcon.appendChild(iIcon);
-        let pIcon = createElement('p');
-        pIcon.innerHTML = technology.name;
-        divIcon.appendChild(pIcon);
-        divLanguagesWrapper.appendChild(divIcon);
-    });
-
-    languagesContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(divLanguagesWrapper);
-    divGroupContainer.appendChild(div);
-    languagesContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(languagesContainer);
-
-    appendHrToElement(languagesContainer);
-}
-
-function renderSoftSkills(data) {
-    if (!data.softSkills.sectionVisible) { return; }
-
-    let softSkillsContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let softSkillUl = createElement('ul');
-
-    sectionTitle.innerHTML = data.softSkills.title;
-    description.innerHTML = data.softSkills.description;
-
-    data.softSkills.items.forEach(softSkill => {
-        let softSkillLi = createElement('li');
-        softSkillLi.innerHTML = softSkill.value;
-        softSkillUl.appendChild(softSkillLi);
-    });
-
-    softSkillsContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(softSkillUl);
-    divGroupContainer.appendChild(div);
-    softSkillsContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(softSkillsContainer);
-
-    appendHrToElement(softSkillsContainer);
-}
-
-function renderCertificatesAndCourses(data) {
-    if (!data.certificates.sectionVisible) { return; }
-
-    let certificationsAndCoursesContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let div = createElement('div');
-    let description = createElement('p');
-    let sectionTitle = createElement('h2');
-    let certificateUl = createElement('ul');
-
-    description.innerHTML = data.certificates.description;
-    sectionTitle.innerHTML = data.certificates.title;
-
-
-    data.certificates.items.forEach(certificate => {
-        let url = createUrlElement(certificate.name, certificate.url, '_blank');
-        let certificateLi = createElement('li');
-        certificateLi.appendChild(url);
-        certificateUl.appendChild(certificateLi);
-    });
-
-    certificationsAndCoursesContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(certificateUl);
-    divGroupContainer.appendChild(div);
-    certificationsAndCoursesContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(certificationsAndCoursesContainer);
-
-    appendHrToElement(certificationsAndCoursesContainer);
-}
-
-function renderURLs(data) {
-    if (!data.interestingUrls.sectionVisible) { return; }
-
-    let interestingUrlsContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let interestingUrlUl = createElement('ul');
-
-    sectionTitle.innerHTML = data.interestingUrls.title;
-    description.innerHTML = data.interestingUrls.description;
-
-    data.interestingUrls.items.forEach(interestingUrl => {
-        let url = createUrlElement(interestingUrl.name, interestingUrl.url, '_blank');
-        let interestingUrlLi = createElement('li');
-
-        interestingUrlLi.appendChild(url);
-        interestingUrlUl.appendChild(interestingUrlLi);
-    });
-
-    interestingUrlsContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(interestingUrlUl);
-    divGroupContainer.appendChild(div);
-    interestingUrlsContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(interestingUrlsContainer);
-
-    appendHrToElement(interestingUrlsContainer);
-}
-
-function renderContact(data) {
-    if (!data.contact.sectionVisible) { return; }
-
-    let personalContainer = createElement('div');
-    let divGroupContainer = createElement('div', ['group-container']);
-    let sectionTitle = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
-    let personalUl = createElement('ul');
-
-    sectionTitle.innerHTML = data.contact.title;
-    description.innerHTML = data.contact.description;
-
-    data.contact.items.forEach(contact => {
-        let url = createUrlElement(contact.name, contact.url, '_blank');
-        let contactLi = createElement('li');
-
-        contactLi.appendChild(url);
-        personalUl.appendChild(contactLi);
-    });
-
-    personalContainer.appendChild(sectionTitle);
-    div.appendChild(description);
-    div.appendChild(personalUl);
-    divGroupContainer.appendChild(div);
-    personalContainer.appendChild(divGroupContainer);
-    wrapper.appendChild(personalContainer);
-
-    appendHrToElement(personalContainer);
+function fetchSettingsData() {
+    return fetch(SETTINGS_URL).then(response => response.json());
 }
 
 function fetchResumeData() {
-    return fetch('https://adriankurek.pl/resume.json').then(response => response.json());
+    return fetch(RESUME_URL).then(response => response.json());
 }
