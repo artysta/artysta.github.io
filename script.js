@@ -247,5 +247,5 @@ function fetchResumeData() {
 }
 
 function setFavicon() {
-    favIcon.href = `./favicons/ak-${color}-favicon.png`;
+    favIcon.href = `./images/favicons/ak-${color}-favicon.png`;
 }
