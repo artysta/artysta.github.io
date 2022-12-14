@@ -10,19 +10,21 @@ const wrapper = document.getElementById('main-wrapper');
 const content = document.getElementsByClassName('content')[0];
 let color;
 
-fetchSettingsData().then(data => {
+fetchSettingsData().then(setting => {
     makeLoaderVisible(true);
 
-    if (!data.pageVisible) {
+    if (!setting.pageVisible) {
         renderMessage('Page is not available at the moment! :(');
         makeLoaderVisible(false);
         return;
     }
     
-    color = data.color;
+    color = setting.color;
 
     fetchResumeData().then(data => {
-        renderSwitchThemeButton();
+        if (setting.buttonEnabled) {
+            renderSwitchThemeButton();
+        }
     
         for (key in data) {
             renderSection(data[key]);
