@@ -8,6 +8,7 @@ const GITHUB_COMMITS_URL = 'https://api.github.com/repos/artysta/artysta.github.
 const loader = document.getElementById('loader');
 const wrapper = document.getElementById('main-wrapper');
 const content = document.getElementsByClassName('content')[0];
+const favIcon = document.getElementById('fav-icon');
 let color;
 
 fetchSettingsData().then(setting => {
@@ -20,6 +21,8 @@ fetchSettingsData().then(setting => {
     }
     
     color = setting.color;
+
+    setFavicon();
 
     fetchResumeData().then(data => {
         if (setting.buttonEnabled) {
@@ -241,4 +244,8 @@ function fetchSettingsData() {
 
 function fetchResumeData() {
     return fetch(RESUME_URL).then(response => response.json());
+}
+
+function setFavicon() {
+    favIcon.href = `./favicons/ak-${color}-favicon.png`;
 }
