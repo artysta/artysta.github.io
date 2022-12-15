@@ -252,7 +252,7 @@ function setFavicon() {
 function changeLogoSrcOnMouseEnter() {
     let logo = this.children[0].children[0];
     let theme = isDarkThemeOn ? 'light' : 'dark';
-    logo.src = `./images/logos/${logo.dataset.name}-${color}-${theme}.${logo.dataset.extension}`;
+    logo.src = `./images/logos/${logo.dataset.name}/${logo.dataset.name}-${color}-${theme}.${logo.dataset.extension}`;
 }
 
 function changeLogoSrcOnMouseLeave() {
