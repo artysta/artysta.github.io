@@ -1,12 +1,29 @@
 :root {
-    --main-accent-color: #b388ff;
     --main-background-color: #2b2b2b;
     --main-text-color: #ffffff;
     --main-group-highlight-color: #444444;
-    --main-highlight-color: #d1c4e9;
     --main-light-background-color: #f5f5f5;
     --main-light-group-highlight-color: #dadada;
-    --main-light-accent-color: #a600ff;
+
+    --url-purple-dark-color: #b388ff;
+    --url-purple-dark-hover-color: #d1c4e9;
+    --url-purple-light-color: #a600ff;
+    --url-purple-light-hover-color: #b388ff;
+
+    --url-cyan-dark-color: #00ffff;
+    --url-cyan-dark-hover-color: #009b9b;
+    --url-cyan-light-color: #009b9b;
+    --url-cyan-light-hover-color: #006363;
+
+    --url-yellow-dark-color: #ffff00;
+    --url-yellow-dark-hover-color: #ffae00;
+    --url-yellow-light-color: #ff7b00;
+    --url-yellow-light-hover-color: #be5c00;
+
+    --url-red-dark-color: #ff0000;
+    --url-red-dark-hover-color: #ff6060;
+    --url-red-light-color: #ff0000;
+    --url-red-light-hover-color: #a50000;
 }
 
 .content {
@@ -39,32 +56,297 @@ body {
 }
 
 a {
-    color: var(--main-accent-color);
     transition: 0.2;
 }
 
 a:hover, a:focus {
-    color: var(--main-highlight-color);
     transition: 0.2;
-    outline: 0px;
 }
 
-.a-light-mode {
-    color: var(--main-light-accent-color);
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.url-purple-dark {
+    color: var(--url-purple-dark-color);
 }
 
-.a-light-mode:hover, .a-light-mode:focus {
-    color: var(--main-accent-color);
-    outline: 0px;
+.url-purple-dark:hover, .url-purple-dark:focus {
+    color: var(--url-purple-dark-hover-color);
 }
+
+.url-purple-light {
+    color: var(--url-purple-light-color);
+}
+
+.url-purple-light:hover, .url-purple-light:focus {
+    color: var(--url-purple-light-hover-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.url-cyan-dark {
+    color: var(--url-cyan-dark-color);
+}
+
+.url-cyan-dark:hover, .url-cyan-dark:focus {
+    color: var(--url-cyan-dark-hover-color);
+}
+
+.url-cyan-light {
+    color: var(--url-cyan-light-color);
+}
+
+.url-cyan-light:hover, .url-cyan-light:focus {
+    color: var(--url-cyan-light-hover-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.url-yellow-dark {
+    color: var(--url-yellow-dark-color);
+}
+
+.url-yellow-dark:hover, .url-yellow-dark:focus {
+    color: var(--url-yellow-dark-hover-color);
+}
+
+.url-yellow-light {
+    color: var(--url-yellow-light-color);
+}
+
+.url-yellow-light:hover, .url-yellow-light:focus {
+    color: var(--url-yellow-light-hover-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.url-red-dark {
+    color: var(--url-red-dark-color);
+}
+
+.url-red-dark:hover, .url-red-dark:focus {
+    color: var(--url-red-dark-hover-color);
+}
+
+.url-red-light {
+    color: var(--url-red-light-color);
+}
+
+.url-red-light:hover, .url-red-light:focus {
+    color: var(--url-red-light-hover-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
 hr {
-    border-top: 2px solid var(--main-accent-color);
+    border-top: 2px solid;
     width: 100%;
 }
 
-.hr-light-mode {
-    border-color: var(--main-light-accent-color);
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.hr-purple-dark {
+    border-color: var(--url-purple-dark-color);
+}
+
+.hr-purple-light {
+    border-color: var(--url-purple-light-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.hr-cyan-dark {
+    border-color: var(--url-cyan-dark-color);
+}
+
+.hr-cyan-light {
+    border-color: var(--url-cyan-light-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.hr-yellow-dark {
+    border-color: var(--url-yellow-dark-color);
+}
+
+.hr-yellow-light {
+    border-color: var(--url-yellow-light-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.hr-red-dark {
+    border-color: var(--url-red-dark-color);
+}
+
+.hr-red-light {
+    border-color: var(--url-red-light-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+i {
+    transition: 0.1s;
+}
+
+i:hover {
+    transition: 0.1s;
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.icon-purple-dark:hover {
+    color: var(--url-purple-dark-color);
+}
+
+.icon-purple-light:hover {
+    color: var(--url-purple-dark-hover-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.icon-cyan-dark:hover {
+    color: var(--url-cyan-dark-color);
+}
+
+.icon-cyan-light:hover {
+    color: var(--url-cyan-dark-hover-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.icon-yellow-dark:hover {
+    color: var(--url-yellow-dark-color);
+}
+
+.icon-yellow-light:hover {
+    color: var(--url-yellow-dark-hover-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.icon-red-dark:hover {
+    color: var(--url-red-dark-color);
+}
+
+.icon-red-light:hover {
+    color: var(--url-red-dark-hover-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+button {
+    border: 1px solid;
+    font-family: monospace;
+    width: 100%;
+    transition: 0.4s;
+}
+
+button:hover, button:focus {
+    transition: 0.4s;
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.button-purple-dark {
+    color: var(--url-purple-dark-color);
+    border-color: var(--url-purple-dark-color);
+    background-color: var(--main-background-color);
+}
+
+.button-purple-dark:hover, .button-purple-dark:focus {
+    color: var(--url-purple-light-color);
+    border-color: var(--url-purple-light-color);
+    background-color: var(--main-light-background-color);
+}
+
+.button-purple-light {
+    color: var(--url-purple-light-color);
+    border-color: var(--url-purple-light-color);
+    background-color: var(--main-light-background-color);
+}
+
+.button-purple-light:hover, .button-purple-light:focus {
+    color: var(--url-purple-dark-color);
+    border-color: var(--url-purple-dark-color);
+    background-color: var(--main-background-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.button-cyan-dark {
+    color: var(--url-cyan-dark-color);
+    border-color: var(--url-cyan-dark-color);
+    background-color: var(--main-background-color);
+}
+
+.button-cyan-dark:hover, .button-cyan-dark:focus {
+    color: var(--url-cyan-light-color);
+    border-color: var(--url-cyan-light-color);
+    background-color: var(--main-light-background-color);
+}
+
+.button-cyan-light {
+    color: var(--url-cyan-light-color);
+    border-color: var(--url-cyan-light-color);
+    background-color: var(--main-light-background-color);
+}
+
+.button-cyan-light:hover, .button-cyan-light:focus {
+    color: var(--url-cyan-dark-color);
+    border-color: var(--url-cyan-dark-color);
+    background-color: var(--main-background-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.button-yellow-dark {
+    color: var(--url-yellow-dark-color);
+    border-color: var(--url-yellow-dark-color);
+    background-color: var(--main-background-color);
+}
+
+.button-yellow-dark:hover, .button-yellow-dark:focus {
+    color: var(--url-yellow-light-color);
+    border-color: var(--url-yellow-light-color);
+    background-color: var(--main-light-background-color);
+}
+
+.button-yellow-light {
+    color: var(--url-yellow-light-color);
+    border-color: var(--url-yellow-light-color);
+    background-color: var(--main-light-background-color);
+}
+
+.button-yellow-light:hover, .button-yellow-light:focus {
+    color: var(--url-yellow-dark-color);
+    border-color: var(--url-yellow-dark-color);
+    background-color: var(--main-background-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.button-red-dark {
+    color: var(--url-red-dark-color);
+    border-color: var(--url-red-dark-color);
+    background-color: var(--main-background-color);
+}
+
+.button-red-dark:hover, .button-red-dark:focus {
+    color: var(--url-red-light-color);
+    border-color: var(--url-red-light-color);
+    background-color: var(--main-light-background-color);
+}
+
+.button-red-light {
+    color: var(--url-red-light-color);
+    border-color: var(--url-red-light-color);
+    background-color: var(--main-light-background-color);
+}
+
+.button-red-light:hover, .button-red-light:focus {
+    color: var(--url-red-dark-color);
+    border-color: var(--url-red-dark-color);
+    background-color: var(--main-background-color);
 }
 
 .div-image {
@@ -81,15 +363,6 @@ hr {
 
 .icons-wrapper:hover {
     transition: 0.4s;
-}
-
-i {
-    transition: 0.1s;
-}
-
-i:hover {
-    color: var(--main-accent-color);
-    transition: 0.1s;
 }
 
 .wrapper {
@@ -130,35 +403,6 @@ img {
 .footer {
     margin-top: 30px;
     margin-bottom: 10px;
-}
-
-button {
-    background-color: var(--main-background-color);
-    color: var(--main-accent-color);
-    border: 1px solid var(--main-accent-color);
-    font-family: monospace;
-    width: 100%;
-    transition: 0.4s;
-}
-
-button:hover, button:focus {
-    background-color: var(--main-light-background-color);
-    color: var(--main-light-accent-color);
-    transition: 0.4s;
-    outline: 0px;
-}
-
-.button-light-mode {
-    background-color: var(--main-light-background-color);
-    color: var(--main-light-accent-color);
-    transition: 0.4s;
-}
-
-.button-light-mode:hover, .button-light-mode:focus {
-    background-color: var(--main-background-color);
-    color: var(--main-accent-color);
-    transition: 0.4s;
-    outline: 0px;
 }
 
 /* Those loader related classes come from https://loading.io/css/. */

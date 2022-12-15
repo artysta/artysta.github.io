@@ -8,18 +8,26 @@ const GITHUB_COMMITS_URL = 'https://api.github.com/repos/artysta/artysta.github.
 const loader = document.getElementById('loader');
 const wrapper = document.getElementById('main-wrapper');
 const content = document.getElementsByClassName('content')[0];
+const favIcon = document.getElementById('fav-icon');
+let color;
 
-fetchSettingsData().then(data => {
+fetchSettingsData().then(setting => {
     makeLoaderVisible(true);
 
-    if (!data.pageVisible) {
+    if (!setting.pageVisible) {
         renderMessage('Page is not available at the moment! :(');
         makeLoaderVisible(false);
         return;
     }
     
+    color = setting.color;
+
+    setFavicon();
+
     fetchResumeData().then(data => {
-        renderSwitchThemeButton();
+        if (setting.buttonEnabled) {
+            renderSwitchThemeButton();
+        }
     
         for (key in data) {
             renderSection(data[key]);
@@ -65,9 +73,10 @@ function switchTheme() {
     let groupContainers = document.getElementsByClassName('group-container');
     let urls = document.getElementsByTagName('a');
     let hrs = document.getElementsByTagName('hr');
+    let icons = document.getElementsByTagName('i');
     let images = document.getElementsByTagName('img');
 
-    button.classList.toggle('button-light-mode');
+    button.classList.toggle(`button-${color}-light`);
     body.classList.toggle('body-light-mode');
 
     for (let groupContainer of groupContainers) {
@@ -75,11 +84,15 @@ function switchTheme() {
     }
 
     for (let url of urls) {
-        url.classList.toggle('a-light-mode');
+        url.classList.toggle(`url-${color}-light`);
     }
 
     for (let hr of hrs) {
-        hr.classList.toggle('hr-light-mode');
+        hr.classList.toggle(`hr-${color}-light`);
+    }
+
+    for (let icon of icons) {
+        icon.classList.toggle(`icon-${color}-light`);
     }
 
     for (let image of images) {
@@ -103,7 +116,7 @@ function renderMessage(message) {
 }
 
 function renderSwitchThemeButton() {
-    let button = createElement('button');
+    let button = createElement('button', [`button-${color}-dark`]);
     button.innerText = SWITCH_THEME;
     button.onclick = switchTheme;
     wrapper.prepend(button);
@@ -116,7 +129,7 @@ function renderFooter() {
         .then(commits => {
             let latestCommit = commits[0];
             let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
-            footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href='${latestCommit.html_url}' target='_blank'>${latestCommit.sha}</a>`;
+            footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href='${latestCommit.html_url}' target='_blank' class="url-${color}-dark">${latestCommit.sha}</a>`;
         })
         .catch(error => footerContainer.innerHTML = `Last edited at N/A`)
         .finally(() => wrapper.appendChild(footerContainer));
@@ -145,7 +158,7 @@ function renderSection(section) {
 
         section.items.forEach(item => {
             let li = createElement('li');
-            li.innerHTML = item.url !== '' ? `<a href="${item.url}" target="_blank">${item.value}</a>` : item.value;
+            li.innerHTML = item.url !== '' ? `<a href="${item.url}" target="_blank" class="url-${color}-dark">${item.value}</a>` : item.value;
             ul.appendChild(li);
         });
 
@@ -203,13 +216,13 @@ function renderSection(section) {
 
         section.icons.forEach(icon => {
             let iconContainer = createElement('div', ['div-image']);
-            let iconI = createElement('i');
+            let iconI = createElement('i', [`icon-${color}-dark`]);
             let iconTitle = createElement('p');
             
             iconTitle.innerHTML = icon.name;
             iconI.classList.add(...icon.class.split(' '));
     
-            if (iconI.classList.length <= 1) {
+            if (iconI.classList.length <= 2) {
                 iconI.style.fontSize = icon.size;
             }
     
@@ -221,7 +234,7 @@ function renderSection(section) {
         div.appendChild(iconsWrapper);
     }
 
-    let hr = createElement('hr');
+    let hr = createElement('hr', [`hr-${color}-dark`]);
     sectionContainer.appendChild(hr);
 }
 
@@ -231,4 +244,8 @@ function fetchSettingsData() {
 
 function fetchResumeData() {
     return fetch(RESUME_URL).then(response => response.json());
+}
+
+function setFavicon() {
+    favIcon.href = `./images/favicons/ak-${color}-favicon.png`;
 }
