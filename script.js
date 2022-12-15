@@ -173,7 +173,11 @@ function renderSection(section) {
             let logoUrlParts = item.logoUrl.split('.');
             
             logo.src = item.logoUrl;
+            logo.dataset.name = item.dataName;
             logo.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
+
+            positionGroupContainer.onmouseenter = changeLogoSrcOnMouseEnter;
+            positionGroupContainer.onmouseleave = changeLogoSrcOnMouseLeave;
 
             item.positions.forEach(position => {
                 let positionUl = createElement('ul');
@@ -243,4 +247,15 @@ function fetchData(url) {
 
 function setFavicon() {
     favIcon.href = `./images/favicons/ak-${color}-favicon.png`;
+}
+
+function changeLogoSrcOnMouseEnter() {
+    let logo = this.children[0].children[0];
+    let theme = isDarkThemeOn ? 'light' : 'dark';
+    logo.src = `./images/logos/${logo.dataset.name}-${color}-${theme}.${logo.dataset.extension}`;
+}
+
+function changeLogoSrcOnMouseLeave() {
+    let logo = this.children[0].children[0];
+    logo.src = logo.src.replace(`-${color}`, '');
 }
