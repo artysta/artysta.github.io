@@ -11,7 +11,7 @@ const content = document.getElementsByClassName('content')[0];
 const favIcon = document.getElementById('fav-icon');
 let color;
 
-fetchSettingsData().then(setting => {
+fetchData(SETTINGS_URL).then(setting => {
     makeLoaderVisible(true);
 
     if (!setting.pageVisible) {
@@ -24,7 +24,7 @@ fetchSettingsData().then(setting => {
 
     setFavicon();
 
-    fetchResumeData().then(data => {
+    fetchData(RESUME_URL).then(data => {
         if (setting.buttonEnabled) {
             renderSwitchThemeButton();
         }
@@ -124,8 +124,7 @@ function renderSwitchThemeButton() {
 
 function renderFooter() {
     let footerContainer = createElement('div', ['footer']);
-    fetch(GITHUB_COMMITS_URL)
-        .then(response => response.json())
+    fetchData(GITHUB_COMMITS_URL)
         .then(commits => {
             let latestCommit = commits[0];
             let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
@@ -238,12 +237,8 @@ function renderSection(section) {
     sectionContainer.appendChild(hr);
 }
 
-function fetchSettingsData() {
-    return fetch(SETTINGS_URL).then(response => response.json());
-}
-
-function fetchResumeData() {
-    return fetch(RESUME_URL).then(response => response.json());
+function fetchData(url) {
+    return fetch(url).then(response => response.json());
 }
 
 function setFavicon() {
