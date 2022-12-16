@@ -235,8 +235,9 @@ i:hover {
 /* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
 button {
-    border: 1px solid;
+    border: 0px;
     font-family: monospace;
+    font-weight: bold;
     width: 100%;
     transition: 0.4s;
 }
