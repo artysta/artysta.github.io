@@ -11,7 +11,7 @@ const content = document.getElementsByClassName('content')[0];
 const favIcon = document.getElementById('fav-icon');
 let color;
 
-fetchSettingsData().then(setting => {
+fetchData(SETTINGS_URL).then(setting => {
     makeLoaderVisible(true);
 
     if (!setting.pageVisible) {
@@ -24,7 +24,7 @@ fetchSettingsData().then(setting => {
 
     setFavicon();
 
-    fetchResumeData().then(data => {
+    fetchData(RESUME_URL).then(data => {
         if (setting.buttonEnabled) {
             renderSwitchThemeButton();
         }
@@ -124,8 +124,7 @@ function renderSwitchThemeButton() {
 
 function renderFooter() {
     let footerContainer = createElement('div', ['footer']);
-    fetch(GITHUB_COMMITS_URL)
-        .then(response => response.json())
+    fetchData(GITHUB_COMMITS_URL)
         .then(commits => {
             let latestCommit = commits[0];
             let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
@@ -174,7 +173,11 @@ function renderSection(section) {
             let logoUrlParts = item.logoUrl.split('.');
             
             logo.src = item.logoUrl;
+            logo.dataset.name = item.dataName;
             logo.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
+
+            positionGroupContainer.onmouseenter = changeLogoSrcOnMouseEnter;
+            positionGroupContainer.onmouseleave = changeLogoSrcOnMouseLeave;
 
             item.positions.forEach(position => {
                 let positionUl = createElement('ul');
@@ -238,14 +241,21 @@ function renderSection(section) {
     sectionContainer.appendChild(hr);
 }
 
-function fetchSettingsData() {
-    return fetch(SETTINGS_URL).then(response => response.json());
-}
-
-function fetchResumeData() {
-    return fetch(RESUME_URL).then(response => response.json());
+function fetchData(url) {
+    return fetch(url).then(response => response.json());
 }
 
 function setFavicon() {
     favIcon.href = `./images/favicons/ak-${color}-favicon.png`;
+}
+
+function changeLogoSrcOnMouseEnter() {
+    let logo = this.children[0].children[0];
+    let theme = isDarkThemeOn ? 'light' : 'dark';
+    logo.src = `./images/logos/${logo.dataset.name}/${logo.dataset.name}-${color}-${theme}.${logo.dataset.extension}`;
+}
+
+function changeLogoSrcOnMouseLeave() {
+    let logo = this.children[0].children[0];
+    logo.src = logo.src.replace(`-${color}`, '');
 }
