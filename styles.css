@@ -57,6 +57,7 @@ body {
 
 a {
     transition: 0.2;
+    outline: 0px;
 }
 
 a:hover, a:focus {
@@ -240,6 +241,7 @@ button {
     font-weight: bold;
     width: 100%;
     transition: 0.4s;
+    outline: 0px;
 }
 
 button:hover, button:focus {
