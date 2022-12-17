@@ -120,6 +120,9 @@ function renderSwitchThemeButton() {
     button.innerText = SWITCH_THEME;
     button.onclick = switchTheme;
     wrapper.prepend(button);
+
+    let hr = createElement('hr', [`hr-${color}-dark`]);
+    wrapper.appendChild(hr);
 }
 
 function renderFooter() {
