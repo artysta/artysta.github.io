@@ -11,38 +11,40 @@ const content = document.getElementsByClassName('content')[0];
 const favIcon = document.getElementById('fav-icon');
 let color;
 
-fetchData(SETTINGS_URL).then(setting => {
-    makeLoaderVisible(true);
+(async () => {
+    try {
+        makeLoaderVisible(true);
+        const setting = await fetchData(SETTINGS_URL);
 
-    if (!setting.pageVisible) {
-        renderMessage('Page is not available at the moment! :(');
-        makeLoaderVisible(false);
-        return;
-    }
-    
-    color = setting.color;
+        if (!setting.pageVisible) {
+            renderMessage('Page is not available at the moment! :(');
+            makeLoaderVisible(false);
+            return;
+        }
 
-    setFavicon();
+        color = setting.color;
 
-    fetchData(RESUME_URL).then(data => {
+        const data = await fetchData(RESUME_URL);
+
         if (setting.buttonEnabled) {
             renderSwitchThemeButton();
         }
-    
+
         for (key in data) {
             renderSection(data[key]);
         }
-    
+
+        setFavicon();
         renderFooter();
-    });
-}).catch(error => {
-    renderMessage('Could not load the page! :(');
-}).finally(() => {
-    setTimeout(() => {
-        makePageVisible();
-        makeLoaderVisible(false);
-    }, 200);
-});
+    } catch (error) {
+        renderMessage('Could not load the page! :(');
+    } finally {
+        setTimeout(() => {
+            makePageVisible();
+            makeLoaderVisible(false);
+        }, 200);
+    }
+})();
 
 function createElement(element, classList) {
     let newElement = document.createElement(element);
@@ -125,16 +127,19 @@ function renderSwitchThemeButton() {
     wrapper.appendChild(hr);
 }
 
-function renderFooter() {
+async function renderFooter() {
     let footerContainer = createElement('div', ['footer']);
-    fetchData(GITHUB_COMMITS_URL)
-        .then(commits => {
-            let latestCommit = commits[0];
-            let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
-            footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href='${latestCommit.html_url}' target='_blank' class="url-${color}-dark">${latestCommit.sha}</a>`;
-        })
-        .catch(error => footerContainer.innerHTML = `Last edited at N/A`)
-        .finally(() => wrapper.appendChild(footerContainer));
+
+    try {
+        const commits = await fetchData(GITHUB_COMMITS_URL);
+        let latestCommit = commits[0];
+        let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
+        footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href='${latestCommit.html_url}' target='_blank' class="url-${color}-dark">${latestCommit.sha}</a>`;
+    } catch (error) {
+        footerContainer.innerHTML = `Last edited at N/A`;
+    } finally {
+        wrapper.appendChild(footerContainer)
+    }
 }
 
 function renderSection(section) {
@@ -244,8 +249,8 @@ function renderSection(section) {
     sectionContainer.appendChild(hr);
 }
 
-function fetchData(url) {
-    return fetch(url).then(response => response.json());
+async function fetchData(url) {
+    return await fetch(url).then(response => response.json());
 }
 
 function setFavicon() {
