@@ -1,51 +1,54 @@
 // TODO: Refactor for sure.
 
 let isDarkThemeOn = true;
+let color;
 const SWITCH_THEME = 'SWITCH THEME';
 const RESUME_URL = 'https://adriankurek.pl/github/resume.json';
 const SETTINGS_URL = 'https://adriankurek.pl/github/settings.json';
 const GITHUB_COMMITS_URL = 'https://api.github.com/repos/artysta/artysta.github.io/commits';
+const PAGE_NOT_AVAILABLE = 'Page is not available at the moment! :(';
+const COULD_NOT_LOAD_PAGE = 'Page is not available at the moment! :(';
 const loader = document.getElementById('loader');
 const wrapper = document.getElementById('main-wrapper');
 const content = document.getElementsByClassName('content')[0];
 const favIcon = document.getElementById('fav-icon');
-let color;
 
-fetchData(SETTINGS_URL).then(setting => {
-    makeLoaderVisible(true);
+(async () => {
+    try {
+        makeLoaderVisible(true);
+        const setting = await fetchData(SETTINGS_URL);
 
-    if (!setting.pageVisible) {
-        renderMessage('Page is not available at the moment! :(');
-        makeLoaderVisible(false);
-        return;
-    }
-    
-    color = setting.color;
+        if (!setting.pageVisible) {
+            renderMessage(PAGE_NOT_AVAILABLE);
+            return;
+        }
 
-    setFavicon();
+        color = setting.color;
 
-    fetchData(RESUME_URL).then(data => {
+        const data = await fetchData(RESUME_URL);
+
         if (setting.buttonEnabled) {
             renderSwitchThemeButton();
         }
-    
+
         for (key in data) {
             renderSection(data[key]);
         }
-    
+
+        setFavicon();
         renderFooter();
-    });
-}).catch(error => {
-    renderMessage('Could not load the page! :(');
-}).finally(() => {
-    setTimeout(() => {
-        makePageVisible();
-        makeLoaderVisible(false);
-    }, 200);
-});
+    } catch (error) {
+        renderMessage(COULD_NOT_LOAD_PAGE);
+    } finally {
+        setTimeout(() => {
+            makePageVisible();
+            makeLoaderVisible(false);
+        }, 300);
+    }
+})();
 
 function createElement(element, classList) {
-    let newElement = document.createElement(element);
+    const newElement = document.createElement(element);
 
     if (classList != undefined) {
         newElement.classList.add(...classList);
@@ -68,13 +71,13 @@ function makeLoaderVisible(visible) {
 
 function switchTheme() {
     isDarkThemeOn = !isDarkThemeOn;
-    let button = document.getElementsByTagName('button')[0];
-    let body = document.body;
-    let groupContainers = document.getElementsByClassName('group-container');
-    let urls = document.getElementsByTagName('a');
-    let hrs = document.getElementsByTagName('hr');
-    let icons = document.getElementsByTagName('i');
-    let images = document.getElementsByTagName('img');
+    const button = document.getElementsByTagName('button')[0];
+    const body = document.body;
+    const groupContainers = document.getElementsByClassName('group-container');
+    const urls = document.getElementsByTagName('a');
+    const hrs = document.getElementsByTagName('hr');
+    const icons = document.getElementsByTagName('i');
+    const images = document.getElementsByTagName('img');
 
     button.classList.toggle(`button-${color}-light`);
     body.classList.toggle('body-light-mode');
@@ -96,15 +99,15 @@ function switchTheme() {
     }
 
     for (let image of images) {
-        let newSrc = image.src.split('-')[0];
-        let extension = image.dataset.extension;
+        const newSrc = image.src.split('-')[0];
+        const extension = image.dataset.extension;
         image.src = isDarkThemeOn ? `${newSrc}-light.${extension}` : `${newSrc}-dark.${extension}`;
     }
 }
 
 function renderMessage(message) {
-    let div = createElement('div');
-    let p = createElement('p');
+    const div = createElement('div');
+    const p = createElement('p');
 
     div.style.display = 'flex';
     div.style.justifyContent = 'center';
@@ -116,35 +119,38 @@ function renderMessage(message) {
 }
 
 function renderSwitchThemeButton() {
-    let button = createElement('button', [`button-${color}-dark`]);
+    const button = createElement('button', [`button-${color}-dark`]);
     button.innerText = SWITCH_THEME;
     button.onclick = switchTheme;
     wrapper.prepend(button);
 
-    let hr = createElement('hr', [`hr-${color}-dark`]);
+    const hr = createElement('hr', [`hr-${color}-dark`]);
     wrapper.appendChild(hr);
 }
 
-function renderFooter() {
-    let footerContainer = createElement('div', ['footer']);
-    fetchData(GITHUB_COMMITS_URL)
-        .then(commits => {
-            let latestCommit = commits[0];
-            let lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
-            footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href='${latestCommit.html_url}' target='_blank' class="url-${color}-dark">${latestCommit.sha}</a>`;
-        })
-        .catch(error => footerContainer.innerHTML = `Last edited at N/A`)
-        .finally(() => wrapper.appendChild(footerContainer));
+async function renderFooter() {
+    const footerContainer = createElement('div', ['footer']);
+
+    try {
+        const commits = await fetchData(GITHUB_COMMITS_URL);
+        const latestCommit = commits[0];
+        const lastEditedAtDate = latestCommit.commit.committer.date.replace('T', ' ').replace('Z', '');
+        footerContainer.innerHTML = `Last edited at ${lastEditedAtDate} UTC | <a href='${latestCommit.html_url}' target='_blank' class="url-${color}-dark">${latestCommit.sha}</a>`;
+    } catch (error) {
+        footerContainer.innerHTML = `Last edited at N/A`;
+    } finally {
+        wrapper.appendChild(footerContainer)
+    }
 }
 
 function renderSection(section) {
     if (!section.visible) { return; }
 
-    let sectionContainer = createElement('div');
-    let groupContainer = createElement('div', ['group-container']);
-    let title = createElement('h2');
-    let div = createElement('div');
-    let description = createElement('p');
+    const sectionContainer = createElement('div');
+    const groupContainer = createElement('div', ['group-container']);
+    const title = createElement('h2');
+    const div = createElement('div');
+    const description = createElement('p');
 
     title.innerHTML = section.title;
     description.innerHTML = section.description;
@@ -156,10 +162,10 @@ function renderSection(section) {
     wrapper.appendChild(sectionContainer);
 
     if (section.hasOwnProperty('items')) {
-        let ul = createElement('ul');
+        const ul = createElement('ul');
 
         section.items.forEach(item => {
-            let li = createElement('li');
+            const li = createElement('li');
             li.innerHTML = item.url !== '' ? `<a href="${item.url}" target="_blank" class="url-${color}-dark">${item.value}</a>` : item.value;
             ul.appendChild(li);
         });
@@ -169,11 +175,11 @@ function renderSection(section) {
 
     if (section.hasOwnProperty('itemsWithLogo')) {
         section.itemsWithLogo.forEach(item => {
-            let positionGroupContainer = createElement('div', ['group-container']);
-            let logoContainer = createElement('div', ['group-logo-container']);
-            let positionsContainer = createElement('div');
-            let logo = createElement('img');
-            let logoUrlParts = item.logoUrl.split('.');
+            const positionGroupContainer = createElement('div', ['group-container']);
+            const logoContainer = createElement('div', ['group-logo-container']);
+            const positionsContainer = createElement('div');
+            const logo = createElement('img');
+            const logoUrlParts = item.logoUrl.split('.');
             
             logo.src = item.logoUrl;
             logo.dataset.name = item.dataName;
@@ -183,8 +189,8 @@ function renderSection(section) {
             positionGroupContainer.onmouseleave = changeLogoSrcOnMouseLeave;
 
             item.positions.forEach(position => {
-                let positionUl = createElement('ul');
-                let positionLi = createElement('li');
+                const positionUl = createElement('ul');
+                const positionLi = createElement('li');
 
                 positionLi.innerHTML = `<strong>${position.dateFrom} - ${position.dateThru}</strong> - ${position.title}`;
                 positionUl.appendChild(positionLi);
@@ -194,8 +200,8 @@ function renderSection(section) {
                 }
 
                 position.details.forEach(detail => {
-                    let detailUl = createElement('ul');
-                    let detailLi = createElement('li');
+                    const detailUl = createElement('ul');
+                    const detailLi = createElement('li');
 
                     detailLi.innerHTML = detail.value;
 
@@ -218,12 +224,12 @@ function renderSection(section) {
     }
 
     if (section.hasOwnProperty('icons')) {
-        let iconsWrapper = createElement('div', ['icons-wrapper']);
+        const iconsWrapper = createElement('div', ['icons-wrapper']);
 
         section.icons.forEach(icon => {
-            let iconContainer = createElement('div', ['div-image']);
-            let iconI = createElement('i', [`icon-${color}-dark`]);
-            let iconTitle = createElement('p');
+            const iconContainer = createElement('div', ['div-image']);
+            const iconI = createElement('i', [`icon-${color}-dark`]);
+            const iconTitle = createElement('p');
             
             iconTitle.innerHTML = icon.name;
             iconI.classList.add(...icon.class.split(' '));
@@ -240,12 +246,12 @@ function renderSection(section) {
         div.appendChild(iconsWrapper);
     }
 
-    let hr = createElement('hr', [`hr-${color}-dark`]);
+    const hr = createElement('hr', [`hr-${color}-dark`]);
     sectionContainer.appendChild(hr);
 }
 
-function fetchData(url) {
-    return fetch(url).then(response => response.json());
+async function fetchData(url) {
+    return await fetch(url).then(response => response.json());
 }
 
 function setFavicon() {
@@ -253,12 +259,12 @@ function setFavicon() {
 }
 
 function changeLogoSrcOnMouseEnter() {
-    let logo = this.children[0].children[0];
-    let theme = isDarkThemeOn ? 'light' : 'dark';
+    const logo = this.children[0].children[0];
+    const theme = isDarkThemeOn ? 'light' : 'dark';
     logo.src = `./images/logos/${logo.dataset.name}/${logo.dataset.name}-${color}-${theme}.${logo.dataset.extension}`;
 }
 
 function changeLogoSrcOnMouseLeave() {
-    let logo = this.children[0].children[0];
+    const logo = this.children[0].children[0];
     logo.src = logo.src.replace(`-${color}`, '');
 }
