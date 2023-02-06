@@ -31,12 +31,18 @@ const renderLine = (color) => `
     <hr class="hr-${color}-dark">
 `;
 
-const renderFooterTemplate = (commits, color) => `
-    ${renderLine(color)}
-    <div class="footer">
-        ${`Last edited at ${commits[0].commit.committer.date.replace('T', ' ').replace('Z', '')} UTC | <a href="${commits[0].html_url}" target="_blank" class="url-${color}-dark">${commits[0].sha}</a>`}
-    </div>
-`;
+const renderFooterTemplate = (commits, color) => {
+    if (commits[0] != undefined) {
+        return `
+            ${renderLine(color)}
+            <div class="footer">
+                ${`Last edited at ${commits[0].commit.committer.date.replace('T', ' ').replace('Z', '')} UTC | <a href="${commits[0].html_url}" target="_blank" class="url-${color}-dark">${commits[0].sha}</a>`}
+            </div>
+        `
+    }
+
+    return ``;
+}
 
 const renderButtonTemplate = (color, text) => `
     <button id="btn-switch-theme" class="button-${color}-dark">${text}</button>
