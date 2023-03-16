@@ -31,12 +31,18 @@ const renderLine = (color) => `
     <hr class="hr-${color}-dark">
 `;
 
-const renderFooterTemplate = (commits, color) => `
-    ${renderLine(color)}
-    <div class="footer">
-        ${`Last edited at ${commits[0].commit.committer.date.replace('T', ' ').replace('Z', '')} UTC | <a href="${commits[0].html_url}" target="_blank" class="url-${color}-dark">${commits[0].sha}</a>`}
-    </div>
-`;
+const renderFooterTemplate = (commits, color) => {
+        if (commits[0] != undefined) {
+            return `
+            ${renderLine(color)}
+            <div class="footer">
+                ${`Last edited at ${commits[0].commit.committer.date.replace('T', ' ').replace('Z', '')} UTC | <a href="${commits[0].html_url}" target="_blank" class="url-${color}-dark">${commits[0].sha}</a>`}
+            </div>
+        `
+    }
+
+    return ``;
+}
 
 const renderButtonTemplate = (color, text) => `
     <button id="btn-switch-theme" class="button-${color}-dark">${text}</button>
@@ -51,12 +57,20 @@ const renderMessageTemplate = (text) => `
 const renderSection = (wrapper, section, color) => {
     wrapper.insertAdjacentHTML('beforeend', renderBasicTemplate(section));
     const mainDiv = document.getElementById(`div-main-${section.key}`);
-    const ul = document.getElementById(`ul-simple-${section.key}`);
 
     if (section.hasOwnProperty('items')) {
+        const ul = document.getElementById(`ul-simple-${section.key}`);
+
         section.items.forEach(item => {
             const li = document.createElement('li');
-            li.innerHTML = item.url !== '' ? `<a href="${item.url}" target="_blank" class="url-${color}-dark">${item.value}</a>` : item.value;
+            li.innerHTML = `
+                ${item.url !== '' ? `<a href="${item.url}" target="_blank" class="url-${color}-dark">${item.title}</a>` : item.title}
+                <ul>
+                    ${(item.items2 && item.items2.length > 0) ? item.items2.map(item2 => `
+                        <li>${item2.url !== '' ? `<a href="${item2.url}" target="_blank" class="url-${color}-dark">${item2.value}</a>` : item2.value}</li>
+                    `).join('') : ''}
+                </ul>
+            `;
             ul.appendChild(li);
         });
     }
