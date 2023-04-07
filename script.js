@@ -88,6 +88,7 @@ function switchTheme() {
     isDarkThemeOn = !isDarkThemeOn;
     const button = document.getElementsByTagName('button')[0];
     const body = document.body;
+    const mainWrapper = document.getElementById('main-wrapper');
     const groupContainers = document.getElementsByClassName('group-container');
     const urls = document.getElementsByTagName('a');
     const hrs = document.getElementsByTagName('hr');
@@ -96,6 +97,7 @@ function switchTheme() {
 
     button.classList.toggle(`button-${color}-light`);
     body.classList.toggle('body-light-mode');
+    mainWrapper.classList.toggle(`wrapper-light-mode`);
 
     for (let groupContainer of groupContainers) {
         groupContainer.classList.toggle('group-container-light-mode');
