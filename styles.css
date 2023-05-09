@@ -69,6 +69,46 @@ a:hover, a:focus {
 
 /* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
+.text-purple-light {
+    color: var(--url-purple-dark-color);
+}
+
+.text-purple-dark {
+    color: var(--url-purple-light-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.text-cyan-light {
+    color: var(--url-cyan-dark-color);
+}
+
+.text-cyan-dark {
+    color: var(--url-cyan-light-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.text-yellow-light {
+    color: var(--url-yellow-dark-color);
+}
+
+.text-yellow-dark {
+    color: var(--url-yellow-light-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+.text-red-light {
+    color: var(--url-red-dark-color);
+}
+
+.text-red-dark {
+    color: var(--url-red-light-color);
+}
+
+/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
 .url-purple-dark {
     color: var(--url-purple-dark-color);
 }
