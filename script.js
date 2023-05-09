@@ -77,11 +77,14 @@ function changeLogoSrcOnMouseEnter() {
     const logo = this.children[0].children[0];
     const theme = isDarkThemeOn ? 'light' : 'dark';
     logo.src = `./images/logos/${logo.dataset.name}/${logo.dataset.name}-${color}-${theme}.${logo.dataset.extension}`;
+    this.children[1].children[0].children[0].classList.add(`text-${color}-${theme}`);
 }
 
 function changeLogoSrcOnMouseLeave() {
     const logo = this.children[0].children[0];
+    const theme = isDarkThemeOn ? 'light' : 'dark';
     logo.src = logo.src.replace(`-${color}`, '');
+    this.children[1].children[0].children[0].classList.remove(`text-${color}-${theme}`);
 }
 
 function switchTheme() {
