@@ -86,6 +86,9 @@ const renderSection = (wrapper, section, color) => {
             img.dataset.extension = logoUrlParts[logoUrlParts.length - 1];
 
             const ulOutter = document.getElementById(`ul-detailed-${section.key}`);
+            const title = document.createElement('h3');
+            title.textContent = item.name;
+            ulOutter.prepend(title);
 
             item.positions.forEach(position => {
                 const liOutter = document.createElement('li');
