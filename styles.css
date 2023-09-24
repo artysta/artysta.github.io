@@ -417,6 +417,8 @@ button:hover, button:focus {
     background-color: var(--main-wrapper-color);
     padding: 5px 20px;
     border-radius: 5px;
+    box-shadow: 4px 6px 20px 0 rgba(0, 0, 0, 0.15);
+    border: 1px solid transparent;
 }
 
 .wrapper-light-mode {
